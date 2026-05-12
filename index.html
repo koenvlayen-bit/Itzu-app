@@ -37,7 +37,7 @@
   --badge-red-bg:#FEE2E2;--badge-red-txt:#DC2626;
   --geo-stroke:#4F46E5;--r:8px;--nav-h:52px;
 }
-html,body{font-family:'Bricolage Grotesque',sans-serif;background:var(--bg);color:var(--txt);min-height:100vh;transition:background .3s,color .3s}
+html,body{font-family:'Bricolage Grotesque',sans-serif;background:var(--bg);color:var(--txt);min-height:100vh}
 .nav{height:var(--nav-h);background:var(--nav-bg);backdrop-filter:blur(12px);border-bottom:1px solid var(--bdr);display:flex;align-items:center;padding:0 28px;gap:10px;position:sticky;top:0;z-index:100;transition:background .3s,border-color .3s}
 .nav-back{display:none;align-items:center;gap:5px;background:none;border:none;cursor:pointer;font:500 13px 'Bricolage Grotesque',sans-serif;color:var(--mut);padding:5px 8px 5px 4px;border-radius:6px;transition:background .15s,color .15s}
 .nav-back:hover{background:var(--surf2);color:var(--txt)}
@@ -123,7 +123,7 @@ tr.row-red{background:var(--red-row)}
 .modal-title{font-size:18px;font-weight:800;margin-bottom:18px;color:var(--txt)}
 .modal-field{margin-bottom:14px}
 .modal-label{font-size:10px;font-weight:700;color:var(--mut);text-transform:uppercase;letter-spacing:.4px;margin-bottom:6px;display:block}
-.modal-input,.modal-select,.modal-textarea{width:100%;font:400 13px 'Bricolage Grotesque',sans-serif;border:1.5px solid var(--bdr);border-radius:var(--r);padding:8px 11px;background:var(--bg);color:var(--txt);outline:none;transition:border-color .15s,background .3s}
+.modal-input,.modal-select,.modal-textarea{width:100%;font:400 13px 'Bricolage Grotesque',sans-serif;border:1.5px solid var(--bdr);border-radius:var(--r);padding:8px 11px;background:var(--bg);color:var(--txt);outline:none;transition:border-color .15s}
 .modal-input:focus,.modal-select:focus,.modal-textarea:focus{border-color:var(--bleu-m)}
 .modal-input[disabled]{opacity:.35}
 .modal-textarea{resize:vertical;min-height:64px}
@@ -167,7 +167,14 @@ tr.row-red{background:var(--red-row)}
       <circle cx="980" cy="120" r="320" fill="none" stroke="var(--geo-stroke)" stroke-width="0.7" opacity="0.18"/>
       <circle cx="980" cy="120" r="220" fill="none" stroke="var(--geo-stroke)" stroke-width="0.7" opacity="0.13"/>
       <circle cx="980" cy="120" r="120" fill="none" stroke="var(--bleu-m)" stroke-width="0.8" opacity="0.18"/>
-      <circle cx="980" cy="120" r="40" fill="var(--geo-stroke)" opacity="0.1"/>
+      <g transform="translate(955,88) rotate(-30 25 32)" opacity="0.45">
+        <path d="M25 4C25 4 38 10 38 26C38 36 31 44 25 48C19 44 12 36 12 26C12 10 25 4 25 4Z" fill="var(--geo-stroke)" stroke="none"/>
+        <ellipse cx="25" cy="26" rx="5" ry="6" fill="var(--bg)" opacity="0.7"/>
+        <path d="M18 42L14 52L22 48Z" fill="var(--geo-stroke)"/>
+        <path d="M32 42L36 52L28 48Z" fill="var(--geo-stroke)"/>
+        <path d="M10 28C10 28 4 30 4 36C8 36 12 32 12 28Z" fill="var(--amb)"/>
+        <path d="M40 28C40 28 46 30 46 36C42 36 38 32 38 28Z" fill="var(--amb)"/>
+      </g>
       <circle cx="100" cy="680" r="240" fill="none" stroke="var(--geo-stroke)" stroke-width="0.5" opacity="0.1"/>
       <circle cx="100" cy="680" r="140" fill="none" stroke="var(--bleu-m)" stroke-width="0.5" opacity="0.08"/>
       <rect x="760" y="320" width="140" height="140" rx="8" fill="none" stroke="var(--geo-stroke)" stroke-width="0.6" opacity="0.14" transform="rotate(18 830 390)"/>
