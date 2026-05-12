@@ -7,8 +7,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-
-/* ===== DARK THEME (default) ===== */
 :root,[data-theme="dark"]{
   --bleu:#6366F1;--bleu-l:rgba(99,102,241,.15);--bleu-m:#818CF8;
   --bg:#0D0D14;--surf:#16161F;--surf2:#1E1E2A;--bdr:rgba(255,255,255,.08);
@@ -24,8 +22,6 @@
   --badge-red-bg:rgba(248,113,113,.15);--badge-red-txt:#FCA5A5;
   --geo-stroke:#6366F1;--r:8px;--nav-h:52px;
 }
-
-/* ===== LIGHT THEME ===== */
 [data-theme="light"]{
   --bleu:#4F46E5;--bleu-l:#EEF2FF;--bleu-m:#818CF8;
   --bg:#F2F1EE;--surf:#fff;--surf2:#F8F8F6;--bdr:rgba(0,0,0,.09);
@@ -41,9 +37,7 @@
   --badge-red-bg:#FEE2E2;--badge-red-txt:#DC2626;
   --geo-stroke:#4F46E5;--r:8px;--nav-h:52px;
 }
-
 html,body{font-family:'Bricolage Grotesque',sans-serif;background:var(--bg);color:var(--txt);min-height:100vh;transition:background .3s,color .3s}
-
 .nav{height:var(--nav-h);background:var(--nav-bg);backdrop-filter:blur(12px);border-bottom:1px solid var(--bdr);display:flex;align-items:center;padding:0 28px;gap:10px;position:sticky;top:0;z-index:100;transition:background .3s,border-color .3s}
 .nav-back{display:none;align-items:center;gap:5px;background:none;border:none;cursor:pointer;font:500 13px 'Bricolage Grotesque',sans-serif;color:var(--mut);padding:5px 8px 5px 4px;border-radius:6px;transition:background .15s,color .15s}
 .nav-back:hover{background:var(--surf2);color:var(--txt)}
@@ -56,36 +50,31 @@ html,body{font-family:'Bricolage Grotesque',sans-serif;background:var(--bg);colo
 .nav-live{display:flex;align-items:center;gap:5px;font-size:11px;font-weight:600;color:var(--grn)}
 .live-dot{width:6px;height:6px;border-radius:50%;background:var(--grn);animation:pulse 2s infinite;display:inline-block}
 @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(34,197,94,.4)}70%{box-shadow:0 0 0 6px rgba(34,197,94,0)}100%{box-shadow:0 0 0 0 rgba(34,197,94,0)}}
-
 .theme-toggle{background:none;border:1px solid var(--bdr);border-radius:20px;cursor:pointer;padding:5px 11px;display:flex;align-items:center;gap:6px;color:var(--mut);font:600 11px 'Bricolage Grotesque',sans-serif;transition:all .15s;margin-left:8px;white-space:nowrap}
 .theme-toggle:hover{background:var(--surf2);color:var(--txt)}
 .btn-icon{background:none;border:1px solid var(--bdr);border-radius:8px;cursor:pointer;padding:6px 7px;display:flex;align-items:center;justify-content:center;color:var(--mut);transition:all .15s;margin-left:6px}
 .btn-icon:hover{background:var(--surf2);color:var(--txt)}
 .btn-p{border:none;cursor:pointer;font:600 13px 'Bricolage Grotesque',sans-serif;padding:10px 24px;border-radius:20px;background:var(--bleu);color:#fff;transition:opacity .15s,transform .1s}
 .btn-p:hover{opacity:.85;transform:translateY(-1px)}
-
 .view{display:none;animation:fadeIn .2s ease}.view.active{display:block}
 @keyframes fadeIn{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
-
 .landing-wrap{position:relative;min-height:calc(100vh - var(--nav-h));overflow:hidden;background:var(--bg);transition:background .3s}
 .landing-inner{position:relative;z-index:2;max-width:700px;margin:0 auto;padding:80px 32px 100px}
 .landing-crumb{font-size:11px;font-weight:600;letter-spacing:1.3px;color:var(--mut);text-transform:uppercase;margin-bottom:20px}
 .landing-title{font-size:clamp(52px,8vw,88px);font-weight:800;line-height:.92;letter-spacing:-3px;color:var(--txt);margin-bottom:40px;transition:color .3s}
 .landing-title span{color:var(--bleu-m)}
 .landing-week{position:fixed;bottom:28px;right:32px;font-size:11px;font-weight:600;color:var(--mut)}
-
 .po-header{max-width:1100px;margin:0 auto;padding:32px 28px 18px;display:flex;align-items:flex-end;justify-content:space-between}
 .po-title{font-size:24px;font-weight:800;letter-spacing:-.5px;color:var(--txt)}
 .po-meta{font-size:12px;color:var(--mut);text-align:right}
 .po-grid{max-width:1100px;margin:0 auto;padding:0 28px 60px;display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start}
-
 .proj-card{background:var(--surf);border:1.5px solid var(--bdr);border-radius:14px;padding:22px;cursor:pointer;transition:transform .18s,box-shadow .18s,border-color .18s,background .3s;display:flex;flex-direction:column;gap:14px}
 [data-theme="dark"] .proj-card:hover{transform:translateY(-3px);box-shadow:0 10px 40px rgba(99,102,241,.2);border-color:rgba(129,140,248,.3)}
 [data-theme="light"] .proj-card:hover{transform:translateY(-3px);box-shadow:0 8px 28px rgba(79,70,229,.13);border-color:var(--bleu-m)}
-.card-name{font-size:22px;font-weight:800;letter-spacing:-.4px;line-height:1.1;color:var(--txt)}
-.card-sub{font-size:12px;color:var(--mut);font-weight:500;margin-top:3px}
+.card-name{font-size:24px;font-weight:800;letter-spacing:-.4px;line-height:1.1;color:var(--txt)}
+.card-sub{font-size:13px;color:var(--mut);font-weight:500;margin-top:3px}
 .badge-strip{display:flex;flex-wrap:wrap;gap:5px}
-.badge{font-size:10px;font-weight:700;padding:2px 9px;border-radius:20px}
+.badge{font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px}
 .badge-grn{background:var(--badge-grn-bg);color:var(--badge-grn-txt)}
 .badge-blu{background:var(--badge-blu-bg);color:var(--badge-blu-txt)}
 .badge-amb{background:var(--badge-amb-bg);color:var(--badge-amb-txt)}
@@ -93,17 +82,16 @@ html,body{font-family:'Bricolage Grotesque',sans-serif;background:var(--bg);colo
 .badge-red{background:var(--badge-red-bg);color:var(--badge-red-txt)}
 .card-stats{display:flex;gap:14px}
 .card-stat{flex:1}
-.card-stat-val{font-size:20px;font-weight:800;color:var(--txt)}
+.card-stat-val{font-size:22px;font-weight:800;color:var(--txt)}
 .c-grn{color:var(--grn)}.c-red{color:var(--red)}
-.card-stat-lbl{font-size:10px;font-weight:600;color:var(--mut);text-transform:uppercase;letter-spacing:.3px}
+.card-stat-lbl{font-size:11px;font-weight:600;color:var(--mut);text-transform:uppercase;letter-spacing:.3px}
 .card-rows{display:flex;flex-direction:column}
-.card-row{display:flex;align-items:center;gap:8px;padding:6px 0;border-top:1px solid var(--bdr);font-size:12px}
+.card-row{display:flex;align-items:center;gap:8px;padding:6px 0;border-top:1px solid var(--bdr);font-size:13px}
 .card-row:first-child{border-top:none;padding-top:0}
 .card-row-desc{flex:1;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--txt)}
 .card-row-date{font-size:10px;color:var(--mut);font-weight:600;white-space:nowrap}
 .card-footer{display:flex;justify-content:flex-end;padding-top:12px;border-top:1px solid var(--bdr)}
 .card-cta{font-size:11px;font-weight:700;color:var(--bleu-m)}
-
 .detail-wrap{max-width:1060px;margin:0 auto;padding:32px 28px 80px}
 .detail-crumb{font-size:10px;font-weight:700;letter-spacing:1.4px;color:var(--mut);text-transform:uppercase;margin-bottom:10px}
 .detail-title{font-size:30px;font-weight:800;letter-spacing:-.6px;margin-bottom:24px;color:var(--txt)}
@@ -117,7 +105,7 @@ html,body{font-family:'Bricolage Grotesque',sans-serif;background:var(--bg);colo
 .btn-add{font:600 12px 'Bricolage Grotesque',sans-serif;background:var(--bleu-l);color:var(--bleu-m);border:none;padding:6px 14px;border-radius:20px;cursor:pointer}
 table{width:100%;border-collapse:collapse}
 th{font-size:10px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--mut);padding:10px 14px;text-align:left;border-bottom:1px solid var(--bdr);background:var(--surf2);transition:background .3s}
-td{padding:9px 14px;font-size:12px;border-bottom:1px solid var(--bdr);vertical-align:middle;color:var(--txt)}
+td{padding:9px 14px;font-size:13px;border-bottom:1px solid var(--bdr);vertical-align:middle;color:var(--txt)}
 tr:last-child td{border-bottom:none}
 tr.row-grn{background:var(--grn-row)}
 tr.row-red{background:var(--red-row)}
@@ -128,7 +116,6 @@ tr.row-red{background:var(--red-row)}
 .actie-toggle.ja{background:var(--badge-red-bg);color:var(--badge-red-txt);border-color:var(--red)}
 .btn-del{background:none;border:none;cursor:pointer;color:var(--mut);font-size:14px;padding:2px 6px;border-radius:4px}
 .btn-del:hover{color:var(--red)}
-
 .modal-overlay{display:none;position:fixed;inset:0;z-index:200;background:rgba(0,0,0,.55);backdrop-filter:blur(6px);align-items:center;justify-content:center}
 .modal-overlay.open{display:flex}
 .modal{background:var(--surf2);border:1px solid var(--bdr);border-radius:14px;padding:26px;width:420px;max-width:calc(100vw - 32px);box-shadow:0 24px 60px rgba(0,0,0,.3);animation:modalIn .2s ease;transition:background .3s}
@@ -169,6 +156,9 @@ tr.row-red{background:var(--red-row)}
   <button class="btn-icon" onclick="openCsvImport()" title="CSV Import">
     <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
   </button>
+  <button class="btn-icon" onclick="logout()" title="Uitloggen" style="margin-left:4px">
+    <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9"/></svg>
+  </button>
 </nav>
 
 <div class="view active" id="vLanding">
@@ -189,7 +179,7 @@ tr.row-red{background:var(--red-row)}
     <div class="landing-inner">
       <div class="landing-crumb">ITZU · AZIRI</div>
       <h1 class="landing-title">Project<br><span>Overzicht</span></h1>
-      <button class="btn-p" style="font-size:15px;padding:13px 30px" onclick="showView('vPo')">Open dashboard →</button>
+      <button class="btn-p" style="font-size:15px;padding:13px 30px" onclick="openLogin()">Login →</button>
     </div>
     <div class="landing-week" id="landingWeek"></div>
   </div>
@@ -201,6 +191,25 @@ tr.row-red{background:var(--red-row)}
 </div>
 
 <div class="view" id="vPoDetail"><div class="detail-wrap" id="detailWrap"></div></div>
+
+<div class="modal-overlay" id="loginModal">
+  <div class="modal">
+    <div class="modal-title">Inloggen</div>
+    <div class="modal-field">
+      <label class="modal-label">Gebruikersnaam</label>
+      <input class="modal-input" id="loginUser" placeholder="Gebruikersnaam" autocomplete="username">
+    </div>
+    <div class="modal-field">
+      <label class="modal-label">Wachtwoord</label>
+      <input class="modal-input" id="loginPass" type="password" placeholder="Wachtwoord" autocomplete="current-password">
+    </div>
+    <div id="loginError" style="font-size:12px;color:var(--red);margin-top:-6px;display:none">Ongeldige gebruikersnaam of wachtwoord.</div>
+    <div class="modal-footer">
+      <button class="btn-cancel" onclick="closeModal('loginModal')">Annuleren</button>
+      <button class="btn-p" onclick="doLogin()">Inloggen</button>
+    </div>
+  </div>
+</div>
 
 <div class="modal-overlay" id="addModal">
   <div class="modal">
@@ -225,6 +234,7 @@ tr.row-red{background:var(--red-row)}
 </div>
 
 <script>
+const USERNAME_MAP={'ItzuProjecten':'itzu@aziri.app'};
 const THEME_KEY='itzu_theme';
 const SUPABASE_URL='https://jxzysikivfivvaziervi.supabase.co';
 const SUPABASE_ANON_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imp4enlzaWtpdmZpdnZhemllcnZpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg1MTg0NjEsImV4cCI6MjA5NDA5NDQ2MX0.BErlAMzGQ0oDkKGgbT9kKEf7ZyxxcBUbCe__c8aIJdM';
@@ -259,46 +269,75 @@ const FALLBACK=[
 
 let data=[],viewStack=['vLanding'],currentProjId=null,addModalProjId=null,nextId=100;
 
+function openLogin(){
+  document.getElementById('loginUser').value='';
+  document.getElementById('loginPass').value='';
+  document.getElementById('loginError').style.display='none';
+  document.getElementById('loginModal').classList.add('open');
+  setTimeout(()=>document.getElementById('loginUser').focus(),100);
+}
+async function doLogin(){
+  const username=document.getElementById('loginUser').value.trim();
+  const pass=document.getElementById('loginPass').value;
+  const email=USERNAME_MAP[username];
+  const errEl=document.getElementById('loginError');
+  if(!email){errEl.style.display='block';document.getElementById('loginPass').value='';document.getElementById('loginPass').focus();return;}
+  const db=getDb();
+  if(!db){errEl.style.display='block';return;}
+  const{error}=await db.auth.signInWithPassword({email,password:pass});
+  if(error){errEl.style.display='block';document.getElementById('loginPass').value='';document.getElementById('loginPass').focus();}
+  else{closeModal('loginModal');await loadData();showView('vPo');}
+}
+document.addEventListener('keydown',e=>{
+  if(e.key==='Enter'&&document.getElementById('loginModal').classList.contains('open'))doLogin();
+});
+
 function getTheme(){return localStorage.getItem(THEME_KEY)||'dark'}
 function applyTheme(t){
   document.documentElement.setAttribute('data-theme',t);
-  const icon=document.getElementById('themeIcon');
-  const label=document.getElementById('themeLabel');
-  if(t==='dark'){
-    label.textContent='Light';
-    icon.innerHTML='<circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>';
-  } else {
-    label.textContent='Dark';
-    icon.innerHTML='<path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>';
-  }
-  if(currentProjId&&document.getElementById('vPoDetail').classList.contains('active')){
+  const icon=document.getElementById('themeIcon'),label=document.getElementById('themeLabel');
+  if(t==='dark'){label.textContent='Light';icon.innerHTML='<circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>';}
+  else{label.textContent='Dark';icon.innerHTML='<path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>';}
+  if(currentProjId&&document.getElementById('vPoDetail').classList.contains('active'))
     document.querySelectorAll('.status-sel').forEach(sel=>{sel.style.cssText=statusSelectStyle(sel.value)});
-  }
 }
-function toggleTheme(){
-  const next=getTheme()==='dark'?'light':'dark';
-  localStorage.setItem(THEME_KEY,next);
-  applyTheme(next);
+function toggleTheme(){const next=getTheme()==='dark'?'light':'dark';localStorage.setItem(THEME_KEY,next);applyTheme(next);}
+
+function getDb(){const{createClient}=window.supabase||{};if(!createClient)return null;return createClient(SUPABASE_URL,SUPABASE_ANON_KEY)}
+
+async function loadData(){
+  const db=getDb();if(!db)return false;
+  const{data:projects,error:pErr}=await db.from('projects').select('*').order('sort_order');
+  if(pErr)return false;
+  const{data:trajecten,error:tErr}=await db.from('trajecten').select('*').order('sort_order');
+  if(tErr)return false;
+  data=projects.map(p=>({id:p.slug,dbId:p.id,name:p.name,rows:trajecten.filter(t=>t.project_id===p.id).map(t=>({id:t.id,desc:t.beschrijving,status:t.status,date:t.oplevering,comment:t.commentaar,actie:t.actie_itzu}))}));
+  return true;
 }
 
 async function init(){
   applyTheme(getTheme());
   try{
-    const{createClient}=window.supabase||{};
-    if(!createClient)throw new Error('no supabase');
-    const db=createClient(SUPABASE_URL,SUPABASE_ANON_KEY);
-    const{data:projects,error:pErr}=await db.from('projects').select('*').order('sort_order');
-    if(pErr)throw pErr;
-    const{data:trajecten,error:tErr}=await db.from('trajecten').select('*').order('sort_order');
-    if(tErr)throw tErr;
-    data=projects.map(p=>({id:p.slug,dbId:p.id,name:p.name,rows:trajecten.filter(t=>t.project_id===p.id).map(t=>({id:t.id,desc:t.beschrijving,status:t.status,date:t.oplevering,comment:t.commentaar,actie:t.actie_itzu}))}));
+    const db=getDb();if(!db)throw new Error('no supabase');
+    const{data:{session}}=await db.auth.getSession();
+    if(!session){setWeekInfo();return;}
+    const ok=await loadData();
+    if(ok)showView('vPo');
   }catch(e){
     data=JSON.parse(JSON.stringify(FALLBACK));
   }
   setWeekInfo();
 }
 
-function getDb(){const{createClient}=window.supabase||{};if(!createClient)return null;return createClient(SUPABASE_URL,SUPABASE_ANON_KEY)}
+async function logout(){
+  const db=getDb();if(db)await db.auth.signOut();
+  data=[];viewStack=['vLanding'];
+  document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+  document.getElementById('vLanding').classList.add('active');
+  document.getElementById('navBack').classList.remove('visible');
+  showToast('Uitgelogd');
+}
+
 async function updateTraject(rowId,fields){try{const db=getDb();if(!db)return;const m={};if('desc'in fields)m.beschrijving=fields.desc;if('status'in fields)m.status=fields.status;if('date'in fields)m.oplevering=fields.date;if('comment'in fields)m.commentaar=fields.comment;if('actie'in fields)m.actie_itzu=fields.actie;await db.from('trajecten').update(m).eq('id',rowId);}catch(e){}}
 async function insertTraject(projectDbId,fields,sortOrder){try{const db=getDb();if(!db)return null;const{data:row}=await db.from('trajecten').insert({project_id:projectDbId,beschrijving:fields.desc||'',status:fields.status||'Aankomend',oplevering:fields.date||'',commentaar:fields.comment||'',actie_itzu:fields.actie||false,sort_order:sortOrder}).select().single();return row;}catch(e){return null}}
 async function deleteTraject(rowId){try{const db=getDb();if(!db)return;await db.from('trajecten').delete().eq('id',rowId);}catch(e){}}
