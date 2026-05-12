@@ -86,10 +86,11 @@ html,body{font-family:'Bricolage Grotesque',sans-serif;background:var(--bg);colo
 .c-grn{color:var(--grn)}.c-red{color:var(--red)}
 .card-stat-lbl{font-size:11px;font-weight:600;color:var(--mut);text-transform:uppercase;letter-spacing:.3px}
 .card-rows{display:flex;flex-direction:column}
-.card-row{display:flex;align-items:center;gap:8px;padding:6px 0;border-top:1px solid var(--bdr);font-size:13px}
+.card-row{display:flex;align-items:center;gap:6px;padding:6px 0;border-top:1px solid var(--bdr);font-size:13px;min-width:0}
 .card-row:first-child{border-top:none;padding-top:0}
-.card-row-desc{flex:1;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--txt)}
-.card-row-date{font-size:10px;color:var(--mut);font-weight:600;white-space:nowrap}
+.card-row-desc{flex:1;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--txt);min-width:0}
+.card-row-date{font-size:11px;color:var(--mut);font-weight:600;white-space:nowrap;flex-shrink:0}
+.card-row .badge{flex-shrink:0;font-size:9px;padding:2px 7px}
 .card-footer{display:flex;justify-content:flex-end;padding-top:12px;border-top:1px solid var(--bdr)}
 .card-cta{font-size:11px;font-weight:700;color:var(--bleu-m)}
 .detail-wrap{max-width:1060px;margin:0 auto;padding:32px 28px 80px}
@@ -156,7 +157,7 @@ tr.row-red{background:var(--red-row)}
   <button class="btn-icon" onclick="openCsvImport()" title="CSV Import">
     <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
   </button>
-  <button class="btn-icon" onclick="logout()" title="Uitloggen" style="margin-left:4px">
+  <button class="btn-icon" onclick="logout()" title="Terug naar landing" style="margin-left:4px">
     <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9"/></svg>
   </button>
 </nav>
@@ -199,25 +200,6 @@ tr.row-red{background:var(--red-row)}
 
 <div class="view" id="vPoDetail"><div class="detail-wrap" id="detailWrap"></div></div>
 
-<div class="modal-overlay" id="loginModal">
-  <div class="modal">
-    <div class="modal-title">Inloggen</div>
-    <div class="modal-field">
-      <label class="modal-label">Gebruikersnaam</label>
-      <input class="modal-input" id="loginUser" placeholder="Gebruikersnaam" autocomplete="username">
-    </div>
-    <div class="modal-field">
-      <label class="modal-label">Wachtwoord</label>
-      <input class="modal-input" id="loginPass" type="password" placeholder="Wachtwoord" autocomplete="current-password">
-    </div>
-    <div id="loginError" style="font-size:12px;color:var(--red);margin-top:-6px;display:none">Ongeldige gebruikersnaam of wachtwoord.</div>
-    <div class="modal-footer">
-      <button class="btn-cancel" onclick="closeModal('loginModal')">Annuleren</button>
-      <button class="btn-p" onclick="doLogin()">Inloggen</button>
-    </div>
-  </div>
-</div>
-
 <div class="modal-overlay" id="addModal">
   <div class="modal">
     <div class="modal-title">Nieuwe regel toevoegen</div>
@@ -241,7 +223,8 @@ tr.row-red{background:var(--red-row)}
 </div>
 
 <script>
-const USERNAME_MAP={'ItzuProjecten':'itzu@aziri.app'};
+function openLogin(){showView('vPo');}
+
 const THEME_KEY='itzu_theme';
 const SUPABASE_URL='https://jxzysikivfivvaziervi.supabase.co';
 const SUPABASE_ANON_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imp4enlzaWtpdmZpdnZhemllcnZpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg1MTg0NjEsImV4cCI6MjA5NDA5NDQ2MX0.BErlAMzGQ0oDkKGgbT9kKEf7ZyxxcBUbCe__c8aIJdM';
@@ -276,29 +259,6 @@ const FALLBACK=[
 
 let data=[],viewStack=['vLanding'],currentProjId=null,addModalProjId=null,nextId=100;
 
-function openLogin(){
-  document.getElementById('loginUser').value='';
-  document.getElementById('loginPass').value='';
-  document.getElementById('loginError').style.display='none';
-  document.getElementById('loginModal').classList.add('open');
-  setTimeout(()=>document.getElementById('loginUser').focus(),100);
-}
-async function doLogin(){
-  const username=document.getElementById('loginUser').value.trim();
-  const pass=document.getElementById('loginPass').value;
-  const email=USERNAME_MAP[username];
-  const errEl=document.getElementById('loginError');
-  if(!email){errEl.style.display='block';document.getElementById('loginPass').value='';document.getElementById('loginPass').focus();return;}
-  const db=getDb();
-  if(!db){errEl.style.display='block';return;}
-  const{error}=await db.auth.signInWithPassword({email,password:pass});
-  if(error){errEl.style.display='block';document.getElementById('loginPass').value='';document.getElementById('loginPass').focus();}
-  else{closeModal('loginModal');await loadData();showView('vPo');}
-}
-document.addEventListener('keydown',e=>{
-  if(e.key==='Enter'&&document.getElementById('loginModal').classList.contains('open'))doLogin();
-});
-
 function getTheme(){return localStorage.getItem(THEME_KEY)||'dark'}
 function applyTheme(t){
   document.documentElement.setAttribute('data-theme',t);
@@ -325,11 +285,8 @@ async function loadData(){
 async function init(){
   applyTheme(getTheme());
   try{
-    const db=getDb();if(!db)throw new Error('no supabase');
-    const{data:{session}}=await db.auth.getSession();
-    if(!session){setWeekInfo();return;}
     const ok=await loadData();
-    if(ok)showView('vPo');
+    if(!ok)data=JSON.parse(JSON.stringify(FALLBACK));
   }catch(e){
     data=JSON.parse(JSON.stringify(FALLBACK));
   }
@@ -337,12 +294,10 @@ async function init(){
 }
 
 async function logout(){
-  const db=getDb();if(db)await db.auth.signOut();
   data=[];viewStack=['vLanding'];
   document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
   document.getElementById('vLanding').classList.add('active');
   document.getElementById('navBack').classList.remove('visible');
-  showToast('Uitgelogd');
 }
 
 async function updateTraject(rowId,fields){try{const db=getDb();if(!db)return;const m={};if('desc'in fields)m.beschrijving=fields.desc;if('status'in fields)m.status=fields.status;if('date'in fields)m.oplevering=fields.date;if('comment'in fields)m.commentaar=fields.comment;if('actie'in fields)m.actie_itzu=fields.actie;await db.from('trajecten').update(m).eq('id',rowId);}catch(e){}}
