@@ -92,7 +92,7 @@ html,body{font-family:'Bricolage Grotesque',sans-serif;background:var(--bg);colo
 .c-grn{color:var(--grn)}.c-red{color:var(--red)}
 .card-stat-lbl{font-size:11px;font-weight:600;color:var(--mut);text-transform:uppercase;letter-spacing:.3px}
 .card-rows{display:flex;flex-direction:column}
-.card-row{display:flex;align-items:flex-start;justify-content:space-between;gap:6px;padding:6px 0;border-top:1px solid var(--bdr);font-size:13px;min-width:0}
+.card-row{display:flex;align-items:center;justify-content:space-between;gap:6px;padding:6px 0;border-top:1px solid var(--bdr);font-size:13px;min-width:0}
 .card-row:first-child{border-top:none;padding-top:0}
 .card-row-desc{font-weight:500;color:var(--txt);flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0;margin-right:8px}
 .card-row-right{display:flex;flex-direction:column;align-items:flex-end;flex-shrink:0;gap:2px}
@@ -227,7 +227,7 @@ tr.row-red{background:var(--red-row)}
   <button class="btn-icon" onclick="openCsvImport()" title="CSV Import" id="csvImportBtn">
     <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
   </button>
-  <button class="btn-icon" onclick="logout()" title="Terug naar landing" style="margin-left:4px">
+  <button class="btn-icon" onclick="logout()" title="Uitloggen" style="margin-left:4px">
     <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9"/></svg>
   </button>
 </nav>
@@ -344,14 +344,14 @@ tr.row-red{background:var(--red-row)}
 <div class="modal-overlay" id="doResetModal">
   <div class="modal" style="width:360px">
     <div class="modal-title">↺ Reset bevestigen</div>
-    <p style="font-size:13px;color:var(--mut);margin-bottom:18px">Alle ticketdata wordt gewist en teruggezet naar standaard.</p>
+    <p style="font-size:13px;color:var(--mut);margin-bottom:18px">Alle ticketdata wordt gewist en teruggezet naar standaard. Dit kan niet ongedaan worden gemaakt.</p>
     <div class="modal-footer"><button class="btn-cancel" onclick="closeModal('doResetModal')">Annuleren</button><button class="btn-p" style="background:var(--red)" onclick="confirmDoReset()">Reset</button></div>
   </div>
 </div>
 
 <script>
-const DO_PASS='Azitzu';
-const CLIENT_PASS='Itziri';
+const DO_PASS='Aziri';
+const CLIENT_PASS='Itzu';
 const THEME_KEY='itzu_theme';
 const SUPABASE_URL='https://jxzysikivfivvaziervi.supabase.co';
 const SUPABASE_ANON_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imp4enlzaWtpdmZpdnZhemllcnZpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg1MTg0NjEsImV4cCI6MjA5NDA5NDQ2MX0.BErlAMzGQ0oDkKGgbT9kKEf7ZyxxcBUbCe__c8aIJdM';
@@ -416,6 +416,9 @@ function openLogin(){
   loadPoData().then(ok=>{if(!ok&&poData.length===0)poData=[];showView('vPo');}).catch(()=>showView('vPo'));
 }
 function logout(){
+  doUnlocked=false;doMode='intern';doProjects=[];doTickets=[];
+  document.getElementById('lockIcon').innerHTML='<rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/>';
+  document.getElementById('lockBtn').classList.remove('unlocked');
   viewStack=['vLanding'];
   document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
   document.getElementById('vLanding').classList.add('active');
@@ -509,7 +512,7 @@ function renderDashboard(){
   poData.forEach(proj=>{
     const rows=proj.rows,afg=countByStatus(rows,'Afgerond'),actie=rows.filter(r=>r.actie).length,gebl=countByStatus(rows,'Geblokkeerd'),total=rows.length;
     const badgeHtml=['Afgerond','On track','Aankomend','Ingepland','Geblokkeerd'].map(s=>{const c=countByStatus(rows,s);return c?`<span class="badge ${statusClass(s)}">${s} ×${c}</span>`:''}).join('');
-    const allRowsHtml=rows.map(r=>`<div class="card-row"><span class="card-row-desc">${r.desc}</span><div class="card-row-right"><span class="badge ${statusClass(r.status)}" style="font-size:9px">${r.status}</span>${r.date?`<span class="card-row-date">${r.date}</span>`:''}</div></div>`).join('');
+    const allRowsHtml=rows.map(r=>`<div class="card-row"><span class="card-row-desc">${r.desc}</span><div class="card-row-right"><span class="badge ${statusClass(r.status)}" style="font-size:9px">${r.status}</span></div></div>`).join('');
     const card=document.createElement('div');card.className='proj-card';
     card.innerHTML=`<div><div class="card-name">${proj.name}</div><div class="card-sub">${total} traject${total!==1?'en':''}</div></div><div class="badge-strip">${badgeHtml}</div><div class="card-stats"><div class="card-stat"><div class="card-stat-val c-grn">${afg}</div><div class="card-stat-lbl">Afgerond</div></div><div class="card-stat"><div class="card-stat-val ${actie>0?'c-red':''}">${actie}</div><div class="card-stat-lbl">Actie Itzu</div></div><div class="card-stat"><div class="card-stat-val ${gebl>0?'c-red':''}">${gebl}</div><div class="card-stat-lbl">Geblokkeerd</div></div></div><div class="card-rows">${allRowsHtml}</div><div class="card-footer"><span class="card-cta">Details &amp; bewerken →</span></div>`;
     card.addEventListener('click',()=>showView('vPoDetail',proj.id));
@@ -619,8 +622,7 @@ function renderDoFilters(){
     btn.onclick=()=>{doFilter=f;renderDoFilters();renderDoTickets();};
     bar.appendChild(btn);
   });
-  const go=counts['GO'],tv=counts['TE VALIDEREN'],tot=counts['ALLE'];
-  document.getElementById('doTicketMeta').textContent=`${tot} TOTAAL · ${go} GOEDGEKEURD · ${tv} OPEN`;
+  document.getElementById('doTicketMeta').textContent=`${counts['ALLE']} TOTAAL · ${counts['GO']} GOEDGEKEURD · ${counts['TE VALIDEREN']} OPEN`;
 }
 
 function renderDoTickets(){
@@ -669,9 +671,7 @@ function renderDoTickets(){
       group.appendChild(nrow);
     });
     const ft=document.createElement('div');ft.className='do-group-footer';ft.style.gridTemplateColumns=gridCols;
-    const ftDev=tickets.reduce((s,t)=>s+t.dev,0);
-    const ftPo=tickets.reduce((s,t)=>s+t.po,0);
-    const ftTotal=ftDev*DEV_RATE+ftPo*PO_RATE;
+    const ftDev=tickets.reduce((s,t)=>s+t.dev,0),ftPo=tickets.reduce((s,t)=>s+t.po,0),ftTotal=ftDev*DEV_RATE+ftPo*PO_RATE;
     ft.innerHTML=`<span></span><span></span><span style="color:rgba(255,255,255,.5);font-size:11px;text-transform:uppercase;letter-spacing:.4px">Subtotaal</span><span style="text-align:right;color:rgba(255,255,255,.6)">${ftDev}</span><span style="text-align:right;color:rgba(255,255,255,.6)">${ftPo}</span><span class="do-total-cell" style="text-align:right">€ ${fmt(ftTotal)}</span><span></span><span></span>${isClient?'':'<span></span><span></span>'}`;
     group.appendChild(ft);
     container.appendChild(group);
@@ -688,8 +688,8 @@ function restoreZero(inp){if(inp.value===''||isNaN(inp.value))inp.value='0';}
 function saveDoNum(id,field,inp){const val=parseFloat(inp.value)||0;const t=doTickets.find(t=>t.id===id);if(!t)return;t[field]=val;updateDoTicket(id,{[field]:val});calcDoTotal(id);}
 function calcDoTotal(id){
   const row=document.getElementById(`do-row-${id}`);if(!row)return;
-  const devInp=row.querySelectorAll('.do-num-input')[0];const poInp=row.querySelectorAll('.do-num-input')[1];
-  const dev=parseFloat(devInp?.value)||0;const po=parseFloat(poInp?.value)||0;
+  const devInp=row.querySelectorAll('.do-num-input')[0],poInp=row.querySelectorAll('.do-num-input')[1];
+  const dev=parseFloat(devInp?.value)||0,po=parseFloat(poInp?.value)||0;
   const totalEl=document.getElementById(`do-total-${id}`);if(totalEl)totalEl.textContent=`€ ${fmt(dev*DEV_RATE+po*PO_RATE)}`;
 }
 function setDoStatus(id,newStatus){
