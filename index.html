@@ -642,7 +642,10 @@ function renderDashboard(){
   poData.forEach(proj=>{
     const rows=proj.rows,afg=countByStatus(rows,'Afgerond'),actie=rows.filter(r=>r.actie).length,gebl=countByStatus(rows,'Geblokkeerd'),total=rows.length;
     const badgeHtml=['Afgerond','On track','Aankomend','Ingepland','Geblokkeerd'].map(s=>{const c=countByStatus(rows,s);return c?`<span class="badge ${statusClass(s)}">${s} ×${c}</span>`:''}).join('');
-    const allRowsHtml=rows.map(r=>`<div class="card-row"><span class="card-row-desc">${r.desc}</span><div class="card-row-right"><span class="badge ${statusClass(r.status)}" style="font-size:9px">${r.status}</span></div></div>`).join('');
+    const afgerond=rows.filter(r=>r.status==='Afgerond');
+    const rest=rows.filter(r=>r.status!=='Afgerond');
+    const sortedRows=[...afgerond,...rest];
+    const allRowsHtml=sortedRows.map(r=>`<div class="card-row"><span class="card-row-desc">${r.desc}</span><div class="card-row-right"><span class="badge ${statusClass(r.status)}" style="font-size:9px">${r.status}</span></div></div>`).join('');
     const card=document.createElement('div');card.className='proj-card';
     card.innerHTML=`<div><div class="card-name">${proj.name}</div><div class="card-sub">${total} traject${total!==1?'en':''}</div></div><div class="badge-strip">${badgeHtml}</div><div class="card-stats"><div class="card-stat"><div class="card-stat-val c-grn">${afg}</div><div class="card-stat-lbl">Afgerond</div></div><div class="card-stat"><div class="card-stat-val ${actie>0?'c-red':''}">${actie}</div><div class="card-stat-lbl">Actie Itzu</div></div><div class="card-stat"><div class="card-stat-val ${gebl>0?'c-red':''}">${gebl}</div><div class="card-stat-lbl">Geblokkeerd</div></div></div><div class="card-rows">${allRowsHtml}</div><div class="card-footer"><span class="card-cta">Details &amp; bewerken →</span></div>`;
     card.addEventListener('click',()=>showView('vPoDetail',proj.id));
