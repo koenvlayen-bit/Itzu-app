@@ -71,12 +71,16 @@ html,body{font-family:'Bricolage Grotesque',sans-serif;background:var(--bg);colo
 .btn-d:hover{opacity:.85}
 .view{display:none;animation:fadeIn .2s ease}.view.active{display:block}
 @keyframes fadeIn{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
+
+/* ===== LANDING ===== */
 .landing-wrap{position:relative;min-height:calc(100vh - var(--nav-h));overflow:hidden;background:var(--bg);transition:background .3s}
 .landing-inner{position:relative;z-index:2;max-width:700px;margin:0 auto;padding:80px 32px 100px}
 .landing-crumb{font-size:11px;font-weight:600;letter-spacing:1.3px;color:var(--mut);text-transform:uppercase;margin-bottom:20px}
 .landing-title{font-size:clamp(52px,8vw,88px);font-weight:800;line-height:.92;letter-spacing:-3px;color:var(--txt);margin-bottom:40px;transition:color .3s}
 .landing-title span{color:var(--bleu-m)}
 .landing-week{position:fixed;bottom:28px;right:32px;font-size:11px;font-weight:600;color:var(--mut)}
+
+/* ===== PO DASHBOARD ===== */
 .po-header{max-width:1100px;margin:0 auto;padding:32px 28px 18px;display:flex;align-items:flex-end;justify-content:space-between}
 .po-title{font-size:24px;font-weight:800;letter-spacing:-.5px;color:var(--txt)}
 .po-meta{font-size:12px;color:var(--mut);text-align:right}
@@ -106,6 +110,8 @@ html,body{font-family:'Bricolage Grotesque',sans-serif;background:var(--bg);colo
 .card-row-date{font-size:10px;color:var(--mut);font-weight:600}
 .card-footer{display:flex;justify-content:flex-end;padding-top:12px;border-top:1px solid var(--bdr)}
 .card-cta{font-size:11px;font-weight:700;color:var(--bleu-m)}
+
+/* ===== PO DETAIL ===== */
 .detail-wrap{max-width:1060px;margin:0 auto;padding:32px 28px 80px}
 .detail-crumb{font-size:11px;font-weight:700;letter-spacing:1.4px;color:var(--mut);text-transform:uppercase;margin-bottom:10px}
 .detail-title{font-size:34px;font-weight:800;letter-spacing:-.6px;margin-bottom:24px;color:var(--txt)}
@@ -132,6 +138,8 @@ tr.row-red{background:var(--red-row)}
 .actie-toggle.ja{background:var(--badge-red-bg);color:var(--badge-red-txt);border-color:var(--red)}
 .btn-del{background:none;border:none;cursor:pointer;color:var(--mut);font-size:14px;padding:2px 6px;border-radius:4px}
 .btn-del:hover{color:var(--red)}
+
+/* ===== DO MODULE ===== */
 .do-wrap{max-width:1200px;margin:0 auto;padding:32px 28px 80px}
 .do-hero{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:28px}
 .do-hero-card{background:var(--surf);border:1.5px solid var(--bdr);border-radius:14px;padding:22px 26px}
@@ -161,16 +169,15 @@ tr.row-red{background:var(--red-row)}
 .do-group{margin-bottom:8px;border-radius:12px;overflow:hidden;border:1.5px solid var(--bdr)}
 .do-table-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
 .do-group-header{background:#1C1C1C;padding:12px 16px;display:flex;align-items:center;justify-content:space-between}
+[data-theme="light"] .do-group-header{background:#1C1C1C}
 .do-group-title{font-size:13px;font-weight:700;color:var(--bleu-m);text-transform:uppercase;letter-spacing:.5px}
 .do-group-count{font-size:11px;color:rgba(255,255,255,.4);margin-left:8px}
 .do-group-go{font-size:12px;color:rgba(255,255,255,.5)}
-.do-col-header{display:grid;background:var(--surf2);padding:0}
+.do-col-header{display:grid;grid-template-columns:36px 110px 1fr 58px 58px 110px 48px 160px 32px;background:var(--surf2);padding:0}
 .do-col-header span{font-size:10px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--mut);padding:8px 8px}
-.do-ticket-row{display:grid;background:var(--surf);border-top:1px solid var(--bdr);transition:background .15s;align-items:center}
+.do-ticket-row{display:grid;grid-template-columns:36px 110px 1fr 58px 58px 110px 48px 160px 32px;background:var(--surf);border-top:1px solid var(--bdr);transition:background .15s;align-items:center}
 .do-ticket-row:hover{background:var(--surf2)}
 .do-ticket-row.no-go-expanded{background:var(--red-row)}
-.do-ticket-row.done-row{background:rgba(34,197,94,.07)}
-[data-theme="light"] .do-ticket-row.done-row{background:#F0FDF4}
 .do-ticket-cell{padding:9px 8px;font-size:13px;color:var(--txt)}
 .do-ticket-num{color:var(--mut);font-weight:700;font-size:12px}
 .do-board{color:var(--bleu-m);font-weight:700;cursor:text}
@@ -181,16 +188,20 @@ tr.row-red{background:var(--red-row)}
 .do-val-btn{font:700 11px 'Bricolage Grotesque',sans-serif;padding:4px 10px;border-radius:20px;border:1.5px solid var(--bdr);background:transparent;color:var(--mut);cursor:pointer;transition:all .15s;white-space:nowrap}
 .do-val-btn.go-active{background:#16A34A;color:#fff;border-color:#16A34A}
 .do-val-btn.nogo-active{background:#DC2626;color:#fff;border-color:#DC2626}
+.do-ticket-row.done-row{background:rgba(34,197,94,.07);}
+[data-theme="light"] .do-ticket-row.done-row{background:#F0FDF4;}
 .do-done-cb{width:14px;height:14px;cursor:pointer;accent-color:var(--grn)}
 .do-nogo-row{display:none;background:var(--red-row);border-top:1px solid var(--red-b)}
 .do-nogo-row.visible{display:flex;padding:8px 16px;gap:8px;align-items:flex-start}
 .do-nogo-textarea{flex:1;background:transparent;border:1px solid var(--red);border-radius:6px;padding:6px 10px;font:400 12px 'Bricolage Grotesque',sans-serif;color:var(--txt);resize:none;outline:none;min-height:48px}
-.do-group-footer{display:grid;background:#1C1C1C;padding:0}
+.do-group-footer{display:grid;grid-template-columns:36px 110px 1fr 58px 58px 110px 48px 160px 32px;background:#1C1C1C;padding:0}
 .do-group-footer span{font-size:12px;font-weight:700;color:rgba(255,255,255,.6);padding:9px 8px}
 .do-group-footer .do-total-cell{color:#fff}
-.do-grand-total{display:grid;background:#1C1C1C;padding:0;border-radius:0 0 12px 12px;margin-top:8px}
+.do-grand-total{display:grid;grid-template-columns:36px 110px 1fr 58px 58px 110px 48px 160px 32px;background:#1C1C1C;padding:0;border-radius:0 0 12px 12px;margin-top:8px}
 .do-grand-total span{font-size:13px;font-weight:800;color:rgba(255,255,255,.6);padding:12px 8px}
 .do-grand-total .do-total-cell{color:#fff}
+
+/* ===== MODAL ===== */
 .modal-overlay{display:none;position:fixed;inset:0;z-index:200;background:rgba(0,0,0,.55);backdrop-filter:blur(6px);align-items:center;justify-content:center}
 .modal-overlay.open{display:flex}
 .modal{background:var(--surf2);border:1px solid var(--bdr);border-radius:14px;padding:26px;width:460px;max-width:calc(100vw - 32px);box-shadow:0 24px 60px rgba(0,0,0,.3);animation:modalIn .2s ease;transition:background .3s;max-height:80vh;overflow-y:auto}
@@ -207,8 +218,11 @@ tr.row-red{background:var(--red-row)}
 .btn-cancel:hover{background:var(--surf);color:var(--txt)}
 .modal-total{font-size:20px;font-weight:800;color:var(--bleu-m);text-align:right;margin-top:4px}
 .budget-modal-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
+
+/* ===== TOAST ===== */
 .toast{position:fixed;bottom:24px;right:24px;background:var(--surf2);border:1px solid var(--bdr);color:var(--txt);font-size:12px;font-weight:600;padding:10px 18px;border-radius:20px;opacity:0;transition:all .3s;pointer-events:none;z-index:999;white-space:nowrap;transform:translateY(8px)}
 .toast.show{opacity:1;transform:translateY(0)}
+
 @media(max-width:700px){.po-grid{grid-template-columns:1fr}.landing-title{font-size:44px}.do-budget-grid{grid-template-columns:1fr 1fr}.do-hero{grid-template-columns:1fr}.detail-wrap{padding:20px 14px 60px}.detail-title{font-size:26px}}
 </style>
 </head>
@@ -231,17 +245,19 @@ tr.row-red{background:var(--red-row)}
     <svg id="themeIcon" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
     <span id="themeLabel">Light</span>
   </button>
+  <!-- Hidden lock — barely visible -->
   <button class="lock-btn" id="lockBtn" onclick="handleLockClick()" title="">
     <svg id="lockIcon" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
   </button>
   <button class="btn-icon" onclick="openCsvImport()" title="CSV Import" id="csvImportBtn">
     <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
   </button>
-  <button class="btn-icon" onclick="logout()" title="Uitloggen" style="margin-left:4px">
+  <button class="btn-icon" onclick="logout()" title="Terug naar landing" style="margin-left:4px">
     <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9"/></svg>
   </button>
 </nav>
 
+<!-- ===== LANDING ===== -->
 <div class="view active" id="vLanding">
   <div class="landing-wrap">
     <svg style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice">
@@ -266,23 +282,32 @@ tr.row-red{background:var(--red-row)}
   </div>
 </div>
 
+<!-- ===== PO DASHBOARD ===== -->
 <div class="view" id="vPo">
-  <div class="po-header"><div class="po-title">Project Overzicht</div><div style="display:flex;align-items:center;gap:10px"><button class="btn-icon" onclick="exportPoCsv()" title="Export naar Excel"><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></button><div class="po-meta" id="poMeta"></div></div></div>
+  <div class="po-header"><div class="po-title">Project Overzicht</div><div style="display:flex;align-items:center;gap:10px"><button class="btn-icon" onclick="exportPoCsv()" title="Export naar CSV"><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></button><div class="po-meta" id="poMeta"></div></div></div>
   <div class="po-grid" id="poGrid"></div>
 </div>
 
+<!-- ===== PO DETAIL ===== -->
 <div class="view" id="vPoDetail"><div class="detail-wrap" id="detailWrap"></div></div>
 
+<!-- ===== DO MODULE ===== -->
 <div class="view" id="vDo">
   <div class="do-wrap">
+    <!-- Hero stats -->
     <div class="do-hero" id="doHero"></div>
+    <!-- Description -->
     <p class="do-desc">Wekelijkse ticketvalidatie per project. Geef GO of NO-GO per ticket en voeg opmerkingen toe waar nodig.</p>
+    <!-- Budget cards -->
     <div class="do-budget-grid" id="doBudgetGrid"></div>
+    <!-- Divider -->
     <hr style="border:none;border-top:1px solid var(--bdr);margin-bottom:28px">
+    <!-- Tickets header -->
     <div class="do-section-header">
       <div class="do-section-title">TICKETS</div>
       <div class="do-section-meta" id="doTicketMeta"></div>
     </div>
+    <!-- Filter + toolbar -->
     <div class="do-filter-bar">
       <div class="do-filters" id="doFilters"></div>
       <div class="do-toolbar">
@@ -290,10 +315,13 @@ tr.row-red{background:var(--red-row)}
         <button class="btn-p" onclick="openDoTicketModal()">+ Ticket</button>
       </div>
     </div>
+    <!-- Ticket groups -->
     <div id="doTicketGroups"></div>
   </div>
 </div>
 
+<!-- ===== MODALS ===== -->
+<!-- PO Add row -->
 <div class="modal-overlay" id="addModal">
   <div class="modal">
     <div class="modal-title">Nieuwe regel toevoegen</div>
@@ -307,15 +335,26 @@ tr.row-red{background:var(--red-row)}
   </div>
 </div>
 
+<!-- PO CSV Import -->
 <div class="modal-overlay" id="csvImportModal">
   <div class="modal">
     <div class="modal-title">CSV Import</div>
-    <p style="font-size:12px;color:var(--mut);margin-bottom:12px">Formaat: Project;Beschrijving;Status;Oplevering;Comment;Actie Itzu</p>
-    <textarea class="modal-textarea" id="csvImportArea" placeholder="Plak hier uw CSV data..." style="height:120px"></textarea>
-    <div class="modal-footer"><button class="btn-cancel" onclick="closeModal('csvImportModal')">Annuleren</button><button class="btn-p" onclick="doImport()">Importeren</button></div>
+    <p style="font-size:12px;color:var(--mut);margin-bottom:16px">Selecteer een CSV-bestand in het weekoverzicht formaat. Bestaande trajecten worden vervangen.</p>
+    <div id="csvDropZone" style="border:2px dashed var(--bdr);border-radius:var(--r);padding:32px 20px;text-align:center;cursor:pointer;transition:border-color .15s" onclick="document.getElementById('csvFileInput').click()" ondragover="event.preventDefault();this.style.borderColor='var(--bleu-m)'" ondragleave="this.style.borderColor='var(--bdr)'" ondrop="handleCsvDrop(event)">
+      <svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" style="color:var(--mut);margin-bottom:8px"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+      <div style="font-size:13px;font-weight:600;color:var(--mut)">Klik of sleep een CSV hier</div>
+      <div id="csvFileName" style="font-size:11px;color:var(--bleu-m);margin-top:6px;display:none"></div>
+    </div>
+    <input type="file" id="csvFileInput" accept=".csv" style="display:none" onchange="handleCsvFile(this)">
+    <div id="csvImportStatus" style="font-size:12px;margin-top:12px;display:none"></div>
+    <div class="modal-footer">
+      <button class="btn-cancel" onclick="closeModal('csvImportModal')">Annuleren</button>
+      <button class="btn-p" id="csvImportBtn2" onclick="doFileImport()" disabled style="opacity:.4">Importeren</button>
+    </div>
   </div>
 </div>
 
+<!-- Lock password modal -->
 <div class="modal-overlay" id="lockModal">
   <div class="modal" style="width:360px">
     <div class="modal-title">🔒 Intern toegang</div>
@@ -328,6 +367,7 @@ tr.row-red{background:var(--red-row)}
   </div>
 </div>
 
+<!-- DO Add ticket modal -->
 <div class="modal-overlay" id="doTicketModal">
   <div class="modal">
     <div class="modal-title">Nieuw ticket toevoegen</div>
@@ -343,6 +383,7 @@ tr.row-red{background:var(--red-row)}
   </div>
 </div>
 
+<!-- DO Budget modal -->
 <div class="modal-overlay" id="doBudgetModal">
   <div class="modal">
     <div class="modal-title">⚙ Budget beheren</div>
@@ -351,6 +392,7 @@ tr.row-red{background:var(--red-row)}
   </div>
 </div>
 
+<!-- DO Reset confirm -->
 <div class="modal-overlay" id="doResetModal">
   <div class="modal" style="width:360px">
     <div class="modal-title">↺ Reset bevestigen</div>
@@ -360,22 +402,35 @@ tr.row-red{background:var(--red-row)}
 </div>
 
 <script>
+// ============================================================
+// CONSTANTS & CONFIG
+// ============================================================
 const DO_PASS='Aziri';
 const CLIENT_PASS='Itzu';
 const THEME_KEY='itzu_theme';
 const SUPABASE_URL='https://jxzysikivfivvaziervi.supabase.co';
 const SUPABASE_ANON_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imp4enlzaWtpdmZpdnZhemllcnZpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg1MTg0NjEsImV4cCI6MjA5NDA5NDQ2MX0.BErlAMzGQ0oDkKGgbT9kKEf7ZyxxcBUbCe__c8aIJdM';
-const DEV_RATE=115,PO_RATE=140;
-let poData=[],viewStack=['vLanding'],currentProjId=null,addModalProjId=null,nextId=100;
-let doUnlocked=false,doMode='intern',doFilter='ALLE';
-let doProjects=[],doTickets=[];
+const DEV_RATE=115, PO_RATE=140;
 
+// ============================================================
+// STATE
+// ============================================================
+let poData=[], viewStack=['vLanding'], currentProjId=null, addModalProjId=null, nextId=100;
+let doUnlocked=false, doMode='intern', doFilter='ALLE'; // doMode: 'intern' | 'client'
+let doProjects=[], doTickets=[];
+
+// ============================================================
+// SUPABASE
+// ============================================================
 function getDb(){const{createClient}=window.supabase||{};if(!createClient)return null;return createClient(SUPABASE_URL,SUPABASE_ANON_KEY)}
 
+// PO data
 async function loadPoData(){
   const db=getDb();if(!db)return false;
-  const{data:projects,error:pErr}=await db.from('projects').select('*').order('sort_order');if(pErr)return false;
-  const{data:trajecten,error:tErr}=await db.from('trajecten').select('*').order('sort_order');if(tErr)return false;
+  const{data:projects,error:pErr}=await db.from('projects').select('*').order('sort_order');
+  if(pErr)return false;
+  const{data:trajecten,error:tErr}=await db.from('trajecten').select('*').order('sort_order');
+  if(tErr)return false;
   poData=projects.map(p=>({id:p.slug,dbId:p.id,name:p.name,rows:trajecten.filter(t=>t.project_id===p.id).map(t=>({id:t.id,desc:t.beschrijving,status:t.status,date:t.oplevering,comment:t.commentaar,actie:t.actie_itzu}))}));
   return true;
 }
@@ -383,6 +438,7 @@ async function updateTraject(rowId,fields){try{const db=getDb();if(!db)return;co
 async function insertTraject(projectDbId,fields,sortOrder){try{const db=getDb();if(!db)return null;const{data:row}=await db.from('trajecten').insert({project_id:projectDbId,beschrijving:fields.desc||'',status:fields.status||'Aankomend',oplevering:fields.date||'',commentaar:fields.comment||'',actie_itzu:fields.actie||false,sort_order:sortOrder}).select().single();return row;}catch(e){return null}}
 async function deleteTraject(rowId){try{const db=getDb();if(!db)return;await db.from('trajecten').delete().eq('id',rowId);}catch(e){}}
 
+// DO data
 const DO_FALLBACK_PROJECTS=[
   {id:'ss',name:'Staffsync',d_budget:100,p_budget:40},
   {id:'fu',name:'FlexU',d_budget:120,p_budget:40},
@@ -399,33 +455,55 @@ const DO_FALLBACK_TICKETS=[
 async function loadDoData(){
   const db=getDb();if(!db){doProjects=DO_FALLBACK_PROJECTS.map(p=>({...p}));doTickets=DO_FALLBACK_TICKETS.map(t=>({...t}));return;}
   try{
-    const{data:proj,error:pErr}=await db.from('do_projects').select('*').order('sort_order');if(pErr)throw pErr;
-    const{data:tick,error:tErr}=await db.from('do_tickets').select('*').order('sort_order');if(tErr)throw tErr;
+    const{data:proj,error:pErr}=await db.from('do_projects').select('*').order('sort_order');
+    if(pErr)throw pErr;
+    const{data:tick,error:tErr}=await db.from('do_tickets').select('*').order('sort_order');
+    if(tErr)throw tErr;
     doProjects=proj.map(p=>({id:p.id,name:p.name,d_budget:p.d_budget,p_budget:p.p_budget}));
     doTickets=tick.map(t=>({id:t.id,pid:t.pid,board:t.board,inh:t.inh,dev:Number(t.dev),po:Number(t.po),status:t.status,comment:t.comment,done:t.done||false}));
-  }catch(e){doProjects=DO_FALLBACK_PROJECTS.map(p=>({...p}));doTickets=DO_FALLBACK_TICKETS.map(t=>({...t}));}
+  }catch(e){
+    doProjects=DO_FALLBACK_PROJECTS.map(p=>({...p}));
+    doTickets=DO_FALLBACK_TICKETS.map(t=>({...t}));
+  }
 }
-async function updateDoTicket(id,fields){try{const db=getDb();if(!db)return;await db.from('do_tickets').update(fields).eq('id',id);}catch(e){}}
+async function updateDoTicket(id,fields){
+  try{const db=getDb();if(!db)return;await db.from('do_tickets').update(fields).eq('id',id);}catch(e){}
+}
 async function insertDoTicket(fields){
   try{
-    const db=getDb();
-    if(!db){const nt={id:'l'+(Date.now()),pid:fields.pid,board:fields.board,inh:fields.inh,dev:fields.dev,po:fields.po,status:'TE VALIDEREN',comment:'',done:false};doTickets.push(nt);return nt;}
+    const db=getDb();if(!db){const nt={id:'l'+(Date.now()),pid:fields.pid,board:fields.board,inh:fields.inh,dev:fields.dev,po:fields.po,status:'TE VALIDEREN',comment:'',done:false};doTickets.push(nt);return nt;}
     const{data:row}=await db.from('do_tickets').insert({pid:fields.pid,board:fields.board,inh:fields.inh,dev:fields.dev,po:fields.po,status:'TE VALIDEREN',comment:'',done:false,sort_order:doTickets.filter(t=>t.pid===fields.pid).length+1}).select().single();
     if(row){const nt={id:row.id,pid:row.pid,board:row.board,inh:row.inh,dev:Number(row.dev),po:Number(row.po),status:row.status,comment:row.comment,done:row.done||false};doTickets.push(nt);return nt;}
   }catch(e){}return null;
 }
-async function deleteDoTicket(id){try{const db=getDb();if(!db){doTickets=doTickets.filter(t=>t.id!==id);return;}await db.from('do_tickets').delete().eq('id',id);doTickets=doTickets.filter(t=>t.id!==id);}catch(e){}}
-async function updateDoBudget(id,d_budget,p_budget){try{const db=getDb();if(!db)return;await db.from('do_projects').update({d_budget,p_budget}).eq('id',id);}catch(e){}}
+async function deleteDoTicket(id){
+  try{const db=getDb();if(!db){doTickets=doTickets.filter(t=>t.id!==id);return;}await db.from('do_tickets').delete().eq('id',id);doTickets=doTickets.filter(t=>t.id!==id);}catch(e){}
+}
+async function updateDoBudget(id,d_budget,p_budget){
+  try{const db=getDb();if(!db)return;await db.from('do_projects').update({d_budget,p_budget}).eq('id',id);}catch(e){}
+}
 
+// ============================================================
+// INIT
+// ============================================================
 async function init(){
   applyTheme(getTheme());
-  try{const ok=await loadPoData();if(!ok)poData=[];}catch(e){poData=[];}
+  try{
+    const ok=await loadPoData();
+    if(!ok)poData=[];
+  }catch(e){poData=[];}
   setWeekInfo();
 }
+
 function openLogin(){
-  loadPoData().then(ok=>{if(!ok&&poData.length===0)poData=[];showView('vPo');}).catch(()=>showView('vPo'));
+  // BUG FIX: always reload PO data fresh on login
+  loadPoData().then(ok=>{
+    if(!ok&&poData.length===0)poData=[];
+    showView('vPo');
+  }).catch(()=>showView('vPo'));
 }
 function logout(){
+  // Reset DO module state so lock requires password again
   doUnlocked=false;doMode='intern';doProjects=[];doTickets=[];
   document.getElementById('lockIcon').innerHTML='<rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/>';
   document.getElementById('lockBtn').classList.remove('unlocked');
@@ -436,16 +514,28 @@ function logout(){
   updateNavForView('vLanding');
 }
 
+// ============================================================
+// LOCK / DO ACCESS
+// ============================================================
 function handleLockClick(){
-  if(doUnlocked){showView('vDo');}
-  else{document.getElementById('lockPass').value='';document.getElementById('lockError').style.display='none';document.getElementById('lockModal').classList.add('open');setTimeout(()=>document.getElementById('lockPass').focus(),100);}
+  if(doUnlocked){
+    // Already unlocked — go to DO module
+    showView('vDo');
+  } else {
+    document.getElementById('lockPass').value='';
+    document.getElementById('lockError').style.display='none';
+    document.getElementById('lockModal').classList.add('open');
+    setTimeout(()=>document.getElementById('lockPass').focus(),100);
+  }
 }
 function submitLock(){
   const val=document.getElementById('lockPass').value;
   if(val===DO_PASS||val===CLIENT_PASS){
-    doUnlocked=true;doMode=val===DO_PASS?'intern':'client';
+    doUnlocked=true;
+    doMode=val===DO_PASS?'intern':'client';
     closeModal('lockModal');
-    document.getElementById('lockIcon').innerHTML='<rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0"/>';
+    const lockIcon=document.getElementById('lockIcon');
+    lockIcon.innerHTML='<rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0"/>';
     document.getElementById('lockBtn').classList.add('unlocked');
     loadDoData().then(()=>{showView('vDo');renderDo();});
     showToast(doMode==='intern'?'🔓 Intern module ontgrendeld':'👁 Klantweergave geopend');
@@ -455,22 +545,32 @@ function submitLock(){
     document.getElementById('lockPass').focus();
   }
 }
-document.addEventListener('keydown',e=>{if(e.key==='Enter'&&document.getElementById('lockModal').classList.contains('open'))submitLock();});
+document.addEventListener('keydown',e=>{
+  if(e.key==='Enter'&&document.getElementById('lockModal').classList.contains('open'))submitLock();
+});
 
+// ============================================================
+// THEME
+// ============================================================
 function getTheme(){return localStorage.getItem(THEME_KEY)||'dark'}
 function applyTheme(t){
   document.documentElement.setAttribute('data-theme',t);
   const icon=document.getElementById('themeIcon'),label=document.getElementById('themeLabel');
   if(t==='dark'){label.textContent='Light';icon.innerHTML='<circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>';}
   else{label.textContent='Dark';icon.innerHTML='<path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>';}
-  if(currentProjId&&document.getElementById('vPoDetail').classList.contains('active'))document.querySelectorAll('.status-sel').forEach(sel=>{sel.style.cssText=statusSelectStyle(sel.value)});
+  if(currentProjId&&document.getElementById('vPoDetail').classList.contains('active'))
+    document.querySelectorAll('.status-sel').forEach(sel=>{sel.style.cssText=statusSelectStyle(sel.value)});
 }
 function toggleTheme(){const next=getTheme()==='dark'?'light':'dark';localStorage.setItem(THEME_KEY,next);applyTheme(next);}
 
+// ============================================================
+// NAVIGATION
+// ============================================================
 function showView(viewId,projId){
   document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
   document.getElementById(viewId).classList.add('active');
   viewStack.push(viewId);
+  document.getElementById('navBack').classList.toggle('visible',viewStack.length>1&&viewStack[viewStack.length-2]!=='vLanding'||viewStack.some(v=>v==='vPoDetail'));
   if(viewId==='vPo')renderDashboard();
   if(viewId==='vPoDetail'){currentProjId=projId;renderDetail(projId);}
   if(viewId==='vDo')renderDo();
@@ -483,6 +583,8 @@ function goBack(){
   const prev=viewStack[viewStack.length-1];
   document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
   document.getElementById(prev).classList.add('active');
+  const showBack=viewStack.length>1&&prev!=='vLanding';
+  document.getElementById('navBack').classList.toggle('visible',showBack);
   if(prev==='vPo')renderDashboard();
   if(prev==='vDo')renderDo();
   updateNavForView(prev);
@@ -490,12 +592,24 @@ function goBack(){
 function updateNavForView(viewId){
   const lbl=document.getElementById('navModuleLabel');
   const csvBtn=document.getElementById('csvImportBtn');
-  if(viewId==='vDo'){lbl.textContent='Doorlopende Ontwikkelingen';lbl.style.display='';csvBtn.style.display='none';}
-  else{lbl.style.display='none';csvBtn.style.display=viewId==='vLanding'?'none':'';}
+  if(viewId==='vDo'){
+    lbl.textContent='Doorlopende Ontwikkelingen';lbl.style.display='';
+    csvBtn.style.display='none';
+  } else {
+    lbl.style.display='none';
+    csvBtn.style.display=viewId==='vLanding'?'none':'';
+  }
   document.getElementById('navBack').classList.toggle('visible',viewStack.length>1&&viewId!=='vLanding');
 }
 
+// ============================================================
+// TOAST
+// ============================================================
 function showToast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2800)}
+
+// ============================================================
+// WEEK INFO
+// ============================================================
 function setWeekInfo(){
   const now=new Date(),start=new Date(now.getFullYear(),0,1);
   const week=Math.ceil(((now-start)/86400000+start.getDay()+1)/7);
@@ -504,6 +618,9 @@ function setWeekInfo(){
   const pm=document.getElementById('poMeta');if(pm)pm.innerHTML=`<div>Week ${week}</div><div>${months[now.getMonth()]} ${now.getFullYear()}</div>`;
 }
 
+// ============================================================
+// PO HELPERS
+// ============================================================
 function statusClass(s){if(s==='Afgerond')return'badge-grn';if(s==='On track')return'badge-blu';if(s==='Aankomend')return'badge-amb';if(s==='Ingepland')return'badge-gry';if(s==='Geblokkeerd')return'badge-red';return'badge-gry'}
 function rowClass(s){if(s==='Afgerond')return'row-grn';if(s==='Geblokkeerd')return'row-red';return''}
 function statusSelectStyle(s){
@@ -517,6 +634,9 @@ function statusSelectStyle(s){
 }
 function countByStatus(rows,s){return rows.filter(r=>r.status===s).length}
 
+// ============================================================
+// PO DASHBOARD
+// ============================================================
 function renderDashboard(){
   const grid=document.getElementById('poGrid');grid.innerHTML='';
   poData.forEach(proj=>{
@@ -530,6 +650,9 @@ function renderDashboard(){
   });
 }
 
+// ============================================================
+// PO DETAIL
+// ============================================================
 function renderDetail(projId){
   const proj=poData.find(p=>p.id===projId);if(!proj)return;
   const rows=proj.rows,total=rows.length,actie=rows.filter(r=>r.actie).length,gebl=countByStatus(rows,'Geblokkeerd');
@@ -583,38 +706,145 @@ function exportPoCsv(){
     document.head.appendChild(sc);
   }
 }
-function openCsvImport(){document.getElementById('csvImportArea').value='';document.getElementById('csvImportModal').classList.add('open')}
-async function doImport(){
-  const raw=document.getElementById('csvImportArea').value.trim();
-  const lines=raw.split('\n').filter(l=>l.trim()&&!l.startsWith('Project;'));
-  for(const line of lines){
-    const parts=line.split(';');if(parts.length<2)continue;
-    const[projName,desc,status,date,comment,actieStr]=parts.map(p=>(p||'').trim());
-    const proj=poData.find(p=>p.name.toLowerCase()===projName.toLowerCase());if(!proj)continue;
-    const row=await insertTraject(proj.dbId,{desc,status:status||'Aankomend',date,comment,actie:(actieStr||'').toLowerCase()==='ja'},proj.rows.length+1);
-    if(row)proj.rows.push({id:row.id,desc:row.beschrijving,status:row.status,date:row.oplevering,comment:row.commentaar,actie:row.actie_itzu});
+function openCsvImport(){
+  document.getElementById('csvFileName').style.display='none';
+  document.getElementById('csvFileName').textContent='';
+  document.getElementById('csvImportStatus').style.display='none';
+  document.getElementById('csvImportBtn2').disabled=true;
+  document.getElementById('csvImportBtn2').style.opacity='.4';
+  document.getElementById('csvFileInput').value='';
+  window._csvParsed=null;
+  document.getElementById('csvImportModal').classList.add('open');
+}
+function handleCsvDrop(e){
+  e.preventDefault();
+  document.getElementById('csvDropZone').style.borderColor='var(--bdr)';
+  const file=e.dataTransfer.files[0];
+  if(file)processCsvFile(file);
+}
+function handleCsvFile(input){
+  const file=input.files[0];
+  if(file)processCsvFile(file);
+}
+function processCsvFile(file){
+  if(!file.name.endsWith('.csv')){
+    showCsvStatus('⚠ Alleen .csv bestanden zijn toegestaan.','var(--red)');return;
   }
-  showToast('Import voltooid ✓');closeModal('csvImportModal');
-  if(currentProjId)renderDetail(currentProjId);
-  if(document.getElementById('vPo').classList.contains('active'))renderDashboard();
+  document.getElementById('csvFileName').textContent=file.name;
+  document.getElementById('csvFileName').style.display='block';
+  const reader=new FileReader();
+  reader.onload=e=>{
+    try{
+      const parsed=parseCsvContent(e.target.result);
+      window._csvParsed=parsed;
+      let count=0;parsed.forEach(p=>count+=p.rows.length);
+      showCsvStatus(`✓ ${parsed.length} projecten, ${count} trajecten gevonden — klaar om te importeren.`,'var(--grn)');
+      document.getElementById('csvImportBtn2').disabled=false;
+      document.getElementById('csvImportBtn2').style.opacity='1';
+    }catch(err){
+      showCsvStatus('⚠ Bestand kon niet worden gelezen. Controleer het formaat.','var(--red)');
+    }
+  };
+  reader.readAsText(file,'UTF-8');
+}
+function showCsvStatus(msg,color){
+  const el=document.getElementById('csvImportStatus');
+  el.textContent=msg;el.style.color=color;el.style.display='block';
+}
+function parseCsvContent(raw){
+  const lines=raw.split('\n').map(l=>l.trim()).filter(l=>l);
+  const projects=[];
+  let currentProj=null;
+  for(const line of lines){
+    // Skip header lines
+    if(line.startsWith('Itzu –')||line.startsWith('Doel:')||line.startsWith('Project,'))continue;
+    // Parse CSV line respecting quoted fields
+    const cols=parseCsvLine(line);
+    if(!cols||cols.length<2)continue;
+    const first=cols[0].trim();
+    const second=cols[1].trim();
+    if(first&&!second){
+      // Project header row
+      currentProj={name:first,rows:[]};
+      projects.push(currentProj);
+    } else if(!first&&second&&currentProj){
+      // Trajectory row
+      currentProj.rows.push({
+        desc:second,
+        status:cols[2]?.trim()||'Aankomend',
+        date:cols[3]?.trim()||'',
+        comment:cols[4]?.trim()||'',
+        actie:(cols[5]?.trim()||'').toLowerCase()==='ja'
+      });
+    }
+  }
+  return projects;
+}
+function parseCsvLine(line){
+  const result=[];let cur='';let inQ=false;
+  for(let i=0;i<line.length;i++){
+    const c=line[i];
+    if(c==='"'){inQ=!inQ;}
+    else if(c===','&&!inQ){result.push(cur);cur='';}
+    else{cur+=c;}
+  }
+  result.push(cur);
+  return result;
+}
+async function doFileImport(){
+  const parsed=window._csvParsed;
+  if(!parsed){showCsvStatus('Geen bestand geselecteerd.','var(--red)');return;}
+  showCsvStatus('Bezig met importeren…','var(--mut)');
+  let imported=0;
+  for(const csvProj of parsed){
+    const proj=poData.find(p=>p.name.toLowerCase()===csvProj.name.toLowerCase());
+    if(!proj)continue;
+    // Delete existing trajecten from Supabase
+    for(const row of proj.rows){await deleteTraject(row.id);}
+    proj.rows=[];
+    // Insert new ones
+    for(let i=0;i<csvProj.rows.length;i++){
+      const r=csvProj.rows[i];
+      const row=await insertTraject(proj.dbId,r,i+1);
+      if(row)proj.rows.push({id:row.id,desc:row.beschrijving,status:row.status,date:row.oplevering,comment:row.commentaar,actie:row.actie_itzu});
+      else proj.rows.push({id:'n'+(nextId++),desc:r.desc,status:r.status,date:r.date,comment:r.comment,actie:r.actie});
+      imported++;
+    }
+  }
+  closeModal('csvImportModal');
+  renderDashboard();
+  showToast(`Import voltooid — ${imported} trajecten geladen ✓`);
 }
 
+// ============================================================
+// DO MODULE — RENDER
+// ============================================================
 function fmt(n){return new Intl.NumberFormat('nl-NL').format(Math.round(n))}
 
 function renderDo(){
+  // Client banner
   let banner=document.getElementById('doClientBanner');
   if(!banner){
-    banner=document.createElement('div');banner.id='doClientBanner';
+    banner=document.createElement('div');
+    banner.id='doClientBanner';
     banner.style.cssText='background:rgba(99,102,241,.15);border-bottom:1px solid rgba(99,102,241,.25);padding:10px 28px;font-size:13px;font-weight:600;color:var(--bleu-m);display:none';
     banner.textContent='👁 Klantweergave — Klik GO of NO-GO per ticket.';
     document.getElementById('vDo').prepend(banner);
   }
   banner.style.display=doMode==='client'?'block':'none';
+
+  // Nav module label color
   const lbl=document.getElementById('navModuleLabel');
   if(lbl)lbl.style.color=doMode==='client'?'var(--bleu-m)':'var(--mut)';
+
+  // Toolbar visibility
   const toolbar=document.querySelector('.do-toolbar');
   if(toolbar)toolbar.style.display=doMode==='client'?'none':'flex';
-  renderDoHero();renderDoBudget();renderDoFilters();renderDoTickets();
+
+  renderDoHero();
+  renderDoBudget();
+  renderDoFilters();
+  renderDoTickets();
 }
 
 function renderDoHero(){
@@ -623,8 +853,14 @@ function renderDoHero(){
   const spent=goTickets.reduce((s,t)=>s+t.dev*DEV_RATE+t.po*PO_RATE,0);
   const totalBudget=doProjects.reduce((s,p)=>s+(p.d_budget*DEV_RATE+p.p_budget*PO_RATE),0);
   document.getElementById('doHero').innerHTML=`
-    <div class="do-hero-card"><div class="do-hero-num blue">${String(teVal).padStart(2,'0')}</div><div class="do-hero-sub">Te valideren · tickets open</div></div>
-    <div class="do-hero-card"><div class="do-hero-num">${String(goTickets.length).padStart(2,'0')}</div><div class="do-hero-sub">Goedgekeurd · € ${fmt(spent)} verbruikt van € ${fmt(totalBudget)}</div></div>`;
+    <div class="do-hero-card">
+      <div class="do-hero-num blue">${String(teVal).padStart(2,'0')}</div>
+      <div class="do-hero-sub">Te valideren · tickets open</div>
+    </div>
+    <div class="do-hero-card">
+      <div class="do-hero-num">${String(goTickets.length).padStart(2,'0')}</div>
+      <div class="do-hero-sub">Goedgekeurd · € ${fmt(spent)} verbruikt van € ${fmt(totalBudget)}</div>
+    </div>`;
 }
 
 function renderDoBudget(){
@@ -638,7 +874,7 @@ function renderDoBudget(){
     const budgetSpent=devUsed*DEV_RATE+poUsed*PO_RATE;
     const budgetTotal=proj.d_budget*DEV_RATE+proj.p_budget*PO_RATE;
     const budgetPct=Math.min(100,budgetTotal?Math.round(budgetSpent/budgetTotal*100):0);
-    const bc=p=>p>=90?'danger':p>=70?'warn':'normal';
+    const barClass=p=>p>=90?'danger':p>=70?'warn':'normal';
     const card=document.createElement('div');card.className='do-budget-card';
     card.innerHTML=`
       <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:2px">
@@ -646,9 +882,15 @@ function renderDoBudget(){
         ${doMode==='intern'?`<button class="btn-icon" style="margin-left:4px;padding:3px 5px" onclick="openDoBudgetModal()" title="Budget beheren"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M2 12h3M19 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12"/></svg></button>`:''}
       </div>
       <div class="do-budget-rate">€${DEV_RATE}/u DEV · €${PO_RATE}/u PO</div>
-      <div class="do-bar-label">DEV UREN</div><div class="do-bar-track"><div class="do-bar-fill ${bc(devPct)}" style="width:${devPct}%"></div></div><div class="do-bar-val">${devUsed}u / ${proj.d_budget}u</div>
-      <div class="do-bar-label">PO UREN</div><div class="do-bar-track"><div class="do-bar-fill ${bc(poPct)}" style="width:${poPct}%"></div></div><div class="do-bar-val">${poUsed}u / ${proj.p_budget}u</div>
-      <div class="do-bar-label">BUDGET</div><div class="do-bar-track"><div class="do-bar-fill ${bc(budgetPct)}" style="width:${budgetPct}%"></div></div><div class="do-bar-val">€ ${fmt(budgetSpent)} / € ${fmt(budgetTotal)}</div>`;
+      <div class="do-bar-label">DEV UREN</div>
+      <div class="do-bar-track"><div class="do-bar-fill ${barClass(devPct)}" style="width:${devPct}%"></div></div>
+      <div class="do-bar-val">${devUsed}u / ${proj.d_budget}u</div>
+      <div class="do-bar-label">PO UREN</div>
+      <div class="do-bar-track"><div class="do-bar-fill ${barClass(poPct)}" style="width:${poPct}%"></div></div>
+      <div class="do-bar-val">${poUsed}u / ${proj.p_budget}u</div>
+      <div class="do-bar-label">BUDGET</div>
+      <div class="do-bar-track"><div class="do-bar-fill ${barClass(budgetPct)}" style="width:${budgetPct}%"></div></div>
+      <div class="do-bar-val">€ ${fmt(budgetSpent)} / € ${fmt(budgetTotal)}</div>`;
     grid.appendChild(card);
   });
 }
@@ -664,7 +906,9 @@ function renderDoFilters(){
     btn.onclick=()=>{doFilter=f;renderDoFilters();renderDoTickets();};
     bar.appendChild(btn);
   });
-  document.getElementById('doTicketMeta').textContent=`${counts['ALLE']} TOTAAL · ${counts['GO']} GOEDGEKEURD · ${counts['TE VALIDEREN']} OPEN`;
+  // meta
+  const go=counts['GO'],tv=counts['TE VALIDEREN'],tot=counts['ALLE'];
+  document.getElementById('doTicketMeta').textContent=`${tot} TOTAAL · ${go} GOEDGEKEURD · ${tv} OPEN`;
 }
 
 function renderDoTickets(){
@@ -679,6 +923,7 @@ function renderDoTickets(){
     const goTotal=goDev*DEV_RATE+goPo*PO_RATE;
     grandDev+=goDev;grandPo+=goPo;grandTotal+=goTotal;
     const group=document.createElement('div');group.className='do-group';
+    // Header
     const hdr=document.createElement('div');hdr.className='do-group-header';
     hdr.innerHTML=`<div><span class="do-group-title">${proj.name}</span><span class="do-group-count">${tickets.length} ticket${tickets.length!==1?'s':''}</span></div><div class="do-group-go">Go: ${goDev}u DEV · ${goPo}u PO · € ${fmt(goTotal)}</div>`;
     group.appendChild(hdr);
@@ -688,83 +933,128 @@ function renderDoTickets(){
     const ch=document.createElement('div');ch.className='do-col-header';ch.style.gridTemplateColumns=gridCols;
     ch.innerHTML=`<span>#</span><span>Boardnr</span><span>Omschrijving</span><span style="text-align:right">DEV</span><span style="text-align:right">PO</span><span style="text-align:right">Totaal (€)</span><span></span><span>Validatie</span>${isClient?'':`<span style="text-align:center;color:var(--grn)" title="Afgerond">✓</span><span></span>`}`;
     scrollWrap.appendChild(ch);
+    // Rows
     let rowIdx=0;
     tickets.forEach(t=>{
       rowIdx++;
       const row=document.createElement('div');
       row.className='do-ticket-row'+(t.status==='NO-GO'?' no-go-expanded':'')+(t.done?' done-row':'');
-      row.id=`do-row-${t.id}`;row.style.gridTemplateColumns=gridCols;
+      row.id=`do-row-${t.id}`;
+      row.style.gridTemplateColumns=gridCols;
       const tot=t.dev*DEV_RATE+t.po*PO_RATE;
       row.innerHTML=`
         <div class="do-ticket-cell do-ticket-num">${String(rowIdx).padStart(2,'0')}</div>
         <div class="do-ticket-cell"><span class="do-board" ${isClient?'':'contenteditable="true"'} onblur="${isClient?'':'saveDoField(\''+t.id+'\',\'board\',this)'}">${t.board}</span></div>
         <div class="do-ticket-cell"><span ${isClient?'':'contenteditable="true"'} onblur="${isClient?'':'saveDoField(\''+t.id+'\',\'inh\',this)'}">${t.inh}</span></div>
-        <div class="do-ticket-cell">${isClient?`<span style="text-align:right;display:block">${t.dev}</span>`:`<input class="do-num-input" type="number" min="0" step="0.5" value="${t.dev}" onfocus="if(this.value==='0')this.value=''" onblur="restoreZero(this);saveDoNum('${t.id}','dev',this)" onchange="calcDoTotal('${t.id}')">`}</div>
-        <div class="do-ticket-cell">${isClient?`<span style="text-align:right;display:block">${t.po}</span>`:`<input class="do-num-input" type="number" min="0" step="0.5" value="${t.po}" onfocus="if(this.value==='0')this.value=''" onblur="restoreZero(this);saveDoNum('${t.id}','po',this)" onchange="calcDoTotal('${t.id}')">`}</div>
+        <div class="do-ticket-cell">${isClient?`<span style="text-align:right;display:block;color:var(--txt)">${t.dev}</span>`:`<input class="do-num-input" type="number" min="0" step="0.5" value="${t.dev}" onfocus="if(this.value==='0')this.value=''" onblur="restoreZero(this);saveDoNum('${t.id}','dev',this)" onchange="calcDoTotal('${t.id}')">`}</div>
+        <div class="do-ticket-cell">${isClient?`<span style="text-align:right;display:block;color:var(--txt)">${t.po}</span>`:`<input class="do-num-input" type="number" min="0" step="0.5" value="${t.po}" onfocus="if(this.value==='0')this.value=''" onblur="restoreZero(this);saveDoNum('${t.id}','po',this)" onchange="calcDoTotal('${t.id}')">`}</div>
         <div class="do-ticket-cell do-total" id="do-total-${t.id}" style="text-align:right">€ ${fmt(tot)}</div>
         <div class="do-ticket-cell"></div>
-        <div class="do-ticket-cell"><div class="do-val-btns"><button class="do-val-btn ${t.status==='GO'?'go-active':''}" onclick="setDoStatus('${t.id}','GO')">GO</button><button class="do-val-btn ${t.status==='NO-GO'?'nogo-active':''}" onclick="setDoStatus('${t.id}','NO-GO')">NO-GO</button></div></div>
+        <div class="do-ticket-cell">
+          <div class="do-val-btns">
+            <button class="do-val-btn ${t.status==='GO'?'go-active':''}" onclick="setDoStatus('${t.id}','GO')">GO</button>
+            <button class="do-val-btn ${t.status==='NO-GO'?'nogo-active':''}" onclick="setDoStatus('${t.id}','NO-GO')">NO-GO</button>
+          </div>
+        </div>
         ${isClient?'':`<div class="do-ticket-cell" style="text-align:center"><input type="checkbox" class="do-done-cb" ${t.done?'checked':''} onchange="toggleDoDone('${t.id}',this)"></div>`}
         ${isClient?'':`<div class="do-ticket-cell"><button class="btn-del" onclick="removeDoTicket('${t.id}')">✕</button></div>`}`;
       scrollWrap.appendChild(row);
+      // NO-GO comment row
       const nrow=document.createElement('div');
       nrow.className='do-nogo-row'+(t.status==='NO-GO'?' visible':'');
       nrow.id=`do-nogo-${t.id}`;
       nrow.innerHTML=`<textarea class="do-nogo-textarea" placeholder="Reden voor NO-GO…" onblur="saveDoComment('${t.id}',this)">${t.comment}</textarea>`;
       scrollWrap.appendChild(nrow);
     });
+    // Footer
     const ft=document.createElement('div');ft.className='do-group-footer';ft.style.gridTemplateColumns=gridCols;
-    const ftDev=tickets.reduce((s,t)=>s+t.dev,0),ftPo=tickets.reduce((s,t)=>s+t.po,0),ftTotal=ftDev*DEV_RATE+ftPo*PO_RATE;
+    const ftDev=tickets.reduce((s,t)=>s+t.dev,0);
+    const ftPo=tickets.reduce((s,t)=>s+t.po,0);
+    const ftTotal=ftDev*DEV_RATE+ftPo*PO_RATE;
     ft.innerHTML=`<span></span><span></span><span style="color:rgba(255,255,255,.5);font-size:11px;text-transform:uppercase;letter-spacing:.4px">Subtotaal</span><span style="text-align:right;color:rgba(255,255,255,.6)">${ftDev}</span><span style="text-align:right;color:rgba(255,255,255,.6)">${ftPo}</span><span class="do-total-cell" style="text-align:right">€ ${fmt(ftTotal)}</span><span></span><span></span>${isClient?'':'<span></span><span></span>'}`;
     scrollWrap.appendChild(ft);
     group.appendChild(scrollWrap);
     container.appendChild(group);
   });
-  if(container.children.length>0){
+  // Grand total
+  if(grandTotal>0||container.children.length>0){
     const gt=document.createElement('div');gt.className='do-grand-total';
     gt.innerHTML=`<span></span><span></span><span style="color:rgba(255,255,255,.5);font-size:11px;text-transform:uppercase;letter-spacing:.4px">Totaal</span><span style="text-align:right;color:rgba(255,255,255,.6)">${grandDev}</span><span style="text-align:right;color:rgba(255,255,255,.6)">${grandPo}</span><span class="do-total-cell" style="text-align:right">€ ${fmt(grandTotal)}</span><span></span><span></span><span></span>`;
     container.appendChild(gt);
   }
 }
 
-function saveDoField(id,field,el){const t=doTickets.find(t=>t.id===id);if(!t)return;t[field]=el.innerText.trim();updateDoTicket(id,{[field]:t[field]});}
+// ============================================================
+// DO — ACTIONS
+// ============================================================
+function saveDoField(id,field,el){
+  const t=doTickets.find(t=>t.id===id);if(!t)return;
+  t[field]=el.innerText.trim();
+  updateDoTicket(id,{[field]:t[field]});
+}
 function restoreZero(inp){if(inp.value===''||isNaN(inp.value))inp.value='0';}
-function saveDoNum(id,field,inp){const val=parseFloat(inp.value)||0;const t=doTickets.find(t=>t.id===id);if(!t)return;t[field]=val;updateDoTicket(id,{[field]:val});calcDoTotal(id);}
+function saveDoNum(id,field,inp){
+  const val=parseFloat(inp.value)||0;
+  const t=doTickets.find(t=>t.id===id);if(!t)return;
+  t[field]=val;
+  updateDoTicket(id,{[field]:val});
+  calcDoTotal(id);
+}
 function calcDoTotal(id){
+  const t=doTickets.find(t=>t.id===id);if(!t)return;
   const row=document.getElementById(`do-row-${id}`);if(!row)return;
-  const devInp=row.querySelectorAll('.do-num-input')[0],poInp=row.querySelectorAll('.do-num-input')[1];
-  const dev=parseFloat(devInp?.value)||0,po=parseFloat(poInp?.value)||0;
-  const totalEl=document.getElementById(`do-total-${id}`);if(totalEl)totalEl.textContent=`€ ${fmt(dev*DEV_RATE+po*PO_RATE)}`;
+  const devInp=row.querySelectorAll('.do-num-input')[0];
+  const poInp=row.querySelectorAll('.do-num-input')[1];
+  const dev=parseFloat(devInp?.value)||0;
+  const po=parseFloat(poInp?.value)||0;
+  const totalEl=document.getElementById(`do-total-${id}`);
+  if(totalEl)totalEl.textContent=`€ ${fmt(dev*DEV_RATE+po*PO_RATE)}`;
 }
 function setDoStatus(id,newStatus){
   const t=doTickets.find(t=>t.id===id);if(!t)return;
   if(t.status===newStatus)newStatus='TE VALIDEREN';
-  t.status=newStatus;updateDoTicket(id,{status:newStatus});
+  t.status=newStatus;
+  updateDoTicket(id,{status:newStatus});
+  // Update buttons
   const row=document.getElementById(`do-row-${id}`);
   if(row){
-    row.className='do-ticket-row'+(newStatus==='NO-GO'?' no-go-expanded':'')+(t.done?' done-row':'');
+    row.className='do-ticket-row'+(newStatus==='NO-GO'?' no-go-expanded':'');
     const btns=row.querySelectorAll('.do-val-btn');
-    if(btns[0])btns[0].className='do-val-btn'+(newStatus==='GO'?' go-active':'');
-    if(btns[1])btns[1].className='do-val-btn'+(newStatus==='NO-GO'?' nogo-active':'');
+    if(btns[0]){btns[0].className='do-val-btn'+(newStatus==='GO'?' go-active':'');}
+    if(btns[1]){btns[1].className='do-val-btn'+(newStatus==='NO-GO'?' nogo-active':'');}
   }
   const nrow=document.getElementById(`do-nogo-${id}`);
   if(nrow)nrow.className='do-nogo-row'+(newStatus==='NO-GO'?' visible':'');
   renderDoHero();renderDoBudget();renderDoFilters();
   showToast(newStatus==='GO'?'✓ GO gezet':newStatus==='NO-GO'?'✗ NO-GO gezet':'↺ Teruggesteld');
 }
-function saveDoComment(id,el){const t=doTickets.find(t=>t.id===id);if(!t)return;t.comment=el.value.trim();updateDoTicket(id,{comment:t.comment});}
+function saveDoComment(id,el){
+  const t=doTickets.find(t=>t.id===id);if(!t)return;
+  t.comment=el.value.trim();
+  updateDoTicket(id,{comment:t.comment});
+}
 function toggleDoDone(id,cb){
   const t=doTickets.find(t=>t.id===id);if(!t)return;
-  t.done=cb.checked;updateDoTicket(id,{done:t.done});
+  t.done=cb.checked;
+  updateDoTicket(id,{done:t.done});
   const row=document.getElementById(`do-row-${id}`);
-  if(row){if(t.done)row.classList.add('done-row');else row.classList.remove('done-row');}
+  if(row){
+    if(t.done)row.classList.add('done-row');
+    else row.classList.remove('done-row');
+  }
 }
-async function removeDoTicket(id){await deleteDoTicket(id);renderDo();showToast('Ticket verwijderd');}
+async function removeDoTicket(id){
+  await deleteDoTicket(id);
+  renderDo();
+  showToast('Ticket verwijderd');
+}
 function openDoTicketModal(){
   const sel=document.getElementById('dtProject');sel.innerHTML='';
   doProjects.forEach(p=>{const o=document.createElement('option');o.value=p.id;o.textContent=p.name;sel.appendChild(o);});
-  document.getElementById('dtBoard').value='TL-';document.getElementById('dtInh').value='';
-  document.getElementById('dtDev').value='0';document.getElementById('dtPo').value='0';
+  document.getElementById('dtBoard').value='TL-';
+  document.getElementById('dtInh').value='';
+  document.getElementById('dtDev').value='0';
+  document.getElementById('dtPo').value='0';
   document.getElementById('dtTotal').textContent='€ 0';
   document.getElementById('doTicketModal').classList.add('open');
   setTimeout(()=>document.getElementById('dtBoard').focus(),100);
@@ -783,7 +1073,9 @@ async function saveDoTicket(){
   const dev=parseFloat(document.getElementById('dtDev').value)||0;
   const po=parseFloat(document.getElementById('dtPo').value)||0;
   await insertDoTicket({pid,board,inh,dev,po});
-  closeModal('doTicketModal');renderDo();showToast('Ticket toegevoegd ✓');
+  closeModal('doTicketModal');
+  renderDo();
+  showToast('Ticket toegevoegd ✓');
 }
 function openDoBudgetModal(){
   const content=document.getElementById('doBudgetModalContent');content.innerHTML='';
@@ -798,28 +1090,43 @@ async function saveDoBudget(){
   for(const p of doProjects){
     const d=parseInt(document.getElementById(`bm-dev-${p.id}`)?.value)||0;
     const po=parseInt(document.getElementById(`bm-po-${p.id}`)?.value)||0;
-    p.d_budget=d;p.p_budget=po;await updateDoBudget(p.id,d,po);
+    p.d_budget=d;p.p_budget=po;
+    await updateDoBudget(p.id,d,po);
   }
-  closeModal('doBudgetModal');renderDoBudget();renderDoHero();showToast('Budget opgeslagen ✓');
+  closeModal('doBudgetModal');
+  renderDoBudget();renderDoHero();
+  showToast('Budget opgeslagen ✓');
 }
 function doExportCsv(){
   const BOM='\uFEFF';
   const rows=[['#','BoardNr','Omschrijving','Project','Dev (u)','PO (u)','Totaal (€)','Status','Commentaar'].join(';')];
   let i=0;
-  doProjects.forEach(proj=>{doTickets.filter(t=>t.pid===proj.id).forEach(t=>{i++;rows.push([i,t.board,t.inh,proj.name,t.dev,t.po,Math.round(t.dev*DEV_RATE+t.po*PO_RATE),t.status,t.comment].join(';'));});});
+  doProjects.forEach(proj=>{
+    doTickets.filter(t=>t.pid===proj.id).forEach(t=>{
+      i++;
+      rows.push([i,t.board,t.inh,proj.name,t.dev,t.po,Math.round(t.dev*DEV_RATE+t.po*PO_RATE),t.status,t.comment].join(';'));
+    });
+  });
   const blob=new Blob([BOM+rows.join('\n')],{type:'text/csv;charset=utf-8'});
   const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='doorlopende-ontwikkelingen.csv';a.click();
   showToast('CSV geëxporteerd ✓');
 }
 function confirmDoReset(){
-  doTickets=DO_FALLBACK_TICKETS.map(t=>({...t}));doProjects=DO_FALLBACK_PROJECTS.map(p=>({...p}));
+  doTickets=DO_FALLBACK_TICKETS.map(t=>({...t}));
+  doProjects=DO_FALLBACK_PROJECTS.map(p=>({...p}));
   closeModal('doResetModal');renderDo();showToast('Data gereset ✓');
 }
 
+// ============================================================
+// MODAL CLOSE
+// ============================================================
 function closeModal(id){document.getElementById(id).classList.remove('open')}
 document.querySelectorAll('.modal-overlay').forEach(ov=>ov.addEventListener('click',e=>{if(e.target===ov)ov.classList.remove('open')}));
 document.addEventListener('keydown',e=>{if(e.key==='Escape')document.querySelectorAll('.modal-overlay.open').forEach(m=>m.classList.remove('open'))});
 
+// ============================================================
+// BOOT
+// ============================================================
 const s=document.createElement('script');
 s.src='https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2';
 s.onload=init;
