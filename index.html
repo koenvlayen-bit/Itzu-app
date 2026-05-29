@@ -1199,8 +1199,9 @@ s.onerror=()=>{applyTheme(getTheme());setWeekInfo()};
 document.head.appendChild(s);
 
 if('serviceWorker' in navigator){
-  window.addEventListener('load',()=>{
-    navigator.serviceWorker.register('/sw.js').catch(()=>{});
+  // Unregister any old service workers to prevent stale caching
+  navigator.serviceWorker.getRegistrations().then(regs=>{
+    regs.forEach(r=>r.unregister());
   });
 }
 </script>
