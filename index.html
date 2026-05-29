@@ -3,6 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
 <title>Itzu · Aziri</title>
 <meta name="theme-color" content="#6366F1">
 <meta name="mobile-web-app-capable" content="yes">
@@ -380,6 +383,21 @@ tr.row-red{background:var(--red-row)}
     </div>
     <div class="modal-field"><label class="modal-label">Totaal €</label><div class="modal-total" id="dtTotal">€ 0</div></div>
     <div class="modal-footer"><button class="btn-cancel" onclick="closeModal('doTicketModal')">Annuleren</button><button class="btn-p" onclick="saveDoTicket()">Toevoegen</button></div>
+  </div>
+</div>
+
+<!-- DO Budget modal -->
+<div class="modal-overlay" id="doEditModal">
+  <div class="modal">
+    <div class="modal-title">Ticket bewerken</div>
+    <div class="modal-field"><label class="modal-label">Board Nr</label><input class="modal-input" id="deBoard"></div>
+    <div class="modal-field"><label class="modal-label">Omschrijving</label><input class="modal-input" id="deInh"></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+      <div class="modal-field"><label class="modal-label">Dev uren</label><input class="modal-input" id="deDev" type="number" min="0" step="0.5" value="0"></div>
+      <div class="modal-field"><label class="modal-label">PO uren</label><input class="modal-input" id="dePo" type="number" min="0" step="0.5" value="0"></div>
+    </div>
+    <div class="modal-field"><label class="modal-label">Totaal €</label><div class="modal-total" id="deTotal">€ 0</div></div>
+    <div class="modal-footer"><button class="btn-cancel" onclick="closeModal('doEditModal')">Annuleren</button><button class="btn-p" onclick="saveDoEdit()">Opslaan</button></div>
   </div>
 </div>
 
@@ -896,7 +914,11 @@ function renderDoBudget(){
       <div class="do-bar-val">${poUsed}u / ${proj.p_budget}u</div>
       <div class="do-bar-label">BUDGET</div>
       <div class="do-bar-track"><div class="do-bar-fill ${barClass(budgetPct)}" style="width:${budgetPct}%"></div></div>
-      <div class="do-bar-val">€ ${fmt(budgetSpent)} / € ${fmt(budgetTotal)}</div>`;
+      <div class="do-bar-val">€ ${fmt(budgetSpent)} / € ${fmt(budgetTotal)}</div>
+      <div style="margin-top:10px;padding-top:10px;border-top:1px solid var(--bdr);display:flex;justify-content:space-between;align-items:center">
+        <span style="font-size:10px;font-weight:700;color:var(--mut);text-transform:uppercase;letter-spacing:.4px">Totaal verbruikt</span>
+        <span style="font-size:13px;font-weight:800;color:${budgetPct>=90?'var(--red)':budgetPct>=70?'var(--amb)':'var(--txt)'}">€ ${fmt(budgetSpent)}</span>
+      </div>`;
     grid.appendChild(card);
   });
 }
@@ -947,6 +969,13 @@ function renderDoTickets(){
       row.className='do-ticket-row'+(t.status==='NO-GO'?' no-go-expanded':'')+(t.done?' done-row':'');
       row.id=`do-row-${t.id}`;
       row.style.gridTemplateColumns=gridCols;
+      if(!isClient){
+        row.style.cursor='pointer';
+        row.addEventListener('click',e=>{
+          if(e.target.closest('button')||e.target.closest('input')||e.target.closest('[contenteditable]'))return;
+          openDoEditModal(t.id);
+        });
+      }
       const tot=t.dev*DEV_RATE+t.po*PO_RATE;
       row.innerHTML=`
         <div class="do-ticket-cell do-ticket-num">${String(rowIdx).padStart(2,'0')}</div>
@@ -1082,6 +1111,36 @@ async function saveDoTicket(){
   closeModal('doTicketModal');
   renderDo();
   showToast('Ticket toegevoegd ✓');
+}
+function openDoEditModal(id){
+  const t=doTickets.find(t=>t.id===id);if(!t)return;
+  window._editTicketId=id;
+  document.getElementById('deBoard').value=t.board;
+  document.getElementById('deInh').value=t.inh;
+  document.getElementById('deDev').value=t.dev;
+  document.getElementById('dePo').value=t.po;
+  document.getElementById('deTotal').textContent=`€ ${fmt(t.dev*DEV_RATE+t.po*PO_RATE)}`;
+  document.getElementById('doEditModal').classList.add('open');
+  setTimeout(()=>document.getElementById('deBoard').focus(),100);
+}
+['deDev','dePo'].forEach(id=>{
+  document.getElementById(id).addEventListener('input',()=>{
+    const dev=parseFloat(document.getElementById('deDev').value)||0;
+    const po=parseFloat(document.getElementById('dePo').value)||0;
+    document.getElementById('deTotal').textContent=`€ ${fmt(dev*DEV_RATE+po*PO_RATE)}`;
+  });
+});
+async function saveDoEdit(){
+  const id=window._editTicketId;
+  const t=doTickets.find(t=>t.id===id);if(!t)return;
+  t.board=document.getElementById('deBoard').value.trim();
+  t.inh=document.getElementById('deInh').value.trim();
+  t.dev=parseFloat(document.getElementById('deDev').value)||0;
+  t.po=parseFloat(document.getElementById('dePo').value)||0;
+  await updateDoTicket(id,{board:t.board,inh:t.inh,dev:t.dev,po:t.po});
+  closeModal('doEditModal');
+  renderDo();
+  showToast('Ticket opgeslagen ✓');
 }
 function openDoBudgetModal(){
   const content=document.getElementById('doBudgetModalContent');content.innerHTML='';
