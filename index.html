@@ -100,7 +100,7 @@ html,body{font-family:'Bricolage Grotesque',sans-serif;background:var(--bg);colo
 .badge-amb{background:var(--badge-amb-bg);color:var(--badge-amb-txt)}
 .badge-gry{background:var(--badge-gry-bg);color:var(--badge-gry-txt)}
 .badge-red{background:var(--badge-red-bg);color:var(--badge-red-txt)}
-.card-stats{display:flex;gap:14px}
+.card-stats{display:flex;gap:14px;flex-wrap:wrap}
 .card-stat{flex:1}
 .card-stat-val{font-size:22px;font-weight:800;color:var(--txt)}
 .c-grn{color:var(--grn)}.c-red{color:var(--red)}
@@ -227,21 +227,24 @@ tr.row-red{background:var(--red-row)}
 .toast.show{opacity:1;transform:translateY(0)}
 
 @media(max-width:700px){
-  .po-grid{grid-template-columns:1fr}
+  html,body{overflow-x:hidden;width:100%}
+  .po-grid{grid-template-columns:1fr;padding:0 14px 40px}
+  .po-header{padding:24px 14px 14px}
   .landing-title{font-size:44px}
   .do-budget-grid{grid-template-columns:1fr 1fr}
   .do-hero{grid-template-columns:1fr}
   .detail-wrap{padding:20px 14px 60px}
   .detail-title{font-size:26px}
+  .proj-card{padding:16px;min-width:0;overflow:hidden}
   .card-name{font-size:20px}
   .card-stats{gap:8px}
   .card-stat-val{font-size:18px}
   .card-stat-lbl{font-size:10px}
-  .badge-strip{gap:4px}
-  .badge{font-size:10px;padding:2px 8px}
-  .proj-card{padding:16px}
-  .po-grid{padding:0 14px 40px}
-  .po-header{padding:24px 14px 14px}
+  .badge-strip{gap:4px;overflow:hidden}
+  .badge{font-size:10px;padding:2px 8px;white-space:nowrap}
+  .card-row{overflow:hidden}
+  .card-row-desc{font-size:12px}
+  .card-row-right .badge{font-size:9px;padding:2px 6px}
 }
 </style>
 </head>
