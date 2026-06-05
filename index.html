@@ -106,10 +106,10 @@ html,body{font-family:'Bricolage Grotesque',sans-serif;background:var(--bg);colo
 .c-grn{color:var(--grn)}.c-red{color:var(--red)}
 .card-stat-lbl{font-size:11px;font-weight:600;color:var(--mut);text-transform:uppercase;letter-spacing:.3px}
 .card-rows{display:flex;flex-direction:column}
-.card-row{display:flex;align-items:flex-start;justify-content:space-between;gap:6px;padding:6px 0;border-top:1px solid var(--bdr);font-size:13px;min-width:0}
+.card-row{display:flex;align-items:flex-start;justify-content:space-between;gap:6px;padding:6px 0;border-top:1px solid var(--bdr);font-size:13px;min-width:0;overflow:hidden}
 .card-row:first-child{border-top:none;padding-top:0}
-.card-row-desc{font-weight:500;color:var(--txt);flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0;margin-right:8px}
-.card-row-right{display:flex;flex-direction:column;align-items:flex-end;flex-shrink:0;gap:2px}
+.card-row-desc{font-weight:500;color:var(--txt);flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0;margin-right:8px;max-width:60%}
+.card-row-right{display:flex;flex-direction:column;align-items:flex-end;flex-shrink:0;gap:2px;max-width:40%}
 .card-row-date{font-size:10px;color:var(--mut);font-weight:600}
 .card-footer{display:flex;justify-content:flex-end;padding-top:12px;border-top:1px solid var(--bdr)}
 .card-cta{font-size:11px;font-weight:700;color:var(--bleu-m)}
