@@ -398,8 +398,8 @@ tr.row-red{background:var(--red-row)}
     <div class="modal-field"><label class="modal-label">Board Nr</label><input class="modal-input" id="dtBoard" placeholder="TL-"></div>
     <div class="modal-field"><label class="modal-label">Omschrijving</label><input class="modal-input" id="dtInh" placeholder="Omschrijving van het ticket"></div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
-      <div class="modal-field"><label class="modal-label">Dev uren</label><input class="modal-input" id="dtDev" type="number" min="0" step="0.5" value="0"></div>
-      <div class="modal-field"><label class="modal-label">PO uren</label><input class="modal-input" id="dtPo" type="number" min="0" step="0.5" value="0"></div>
+      <div class="modal-field"><label class="modal-label">Dev uren</label><input class="modal-input" id="dtDev" type="number" min="0" step="0.5" placeholder="0"></div>
+      <div class="modal-field"><label class="modal-label">PO uren</label><input class="modal-input" id="dtPo" type="number" min="0" step="0.5" placeholder="0"></div>
     </div>
     <div class="modal-field"><label class="modal-label">Totaal €</label><div class="modal-total" id="dtTotal">€ 0</div></div>
     <div class="modal-footer"><button class="btn-cancel" onclick="closeModal('doTicketModal')">Annuleren</button><button class="btn-p" onclick="saveDoTicket()">Toevoegen</button></div>
@@ -1111,8 +1111,8 @@ function openDoTicketModal(){
   doProjects.forEach(p=>{const o=document.createElement('option');o.value=p.id;o.textContent=p.name;sel.appendChild(o);});
   document.getElementById('dtBoard').value='TL-';
   document.getElementById('dtInh').value='';
-  document.getElementById('dtDev').value='0';
-  document.getElementById('dtPo').value='0';
+  document.getElementById('dtDev').value='';
+  document.getElementById('dtPo').value='';
   document.getElementById('dtTotal').textContent='€ 0';
   document.getElementById('doTicketModal').classList.add('open');
   setTimeout(()=>document.getElementById('dtBoard').focus(),100);
