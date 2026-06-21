@@ -923,7 +923,10 @@ function renderDoBudget(){
     card.innerHTML=`
       <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:2px">
         <div class="do-budget-title">${proj.name}</div>
-        ${doMode==='intern'?`<button class="btn-icon" style="margin-left:4px;padding:3px 5px" onclick="openDoBudgetModal()" title="Budget beheren"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M2 12h3M19 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12"/></svg></button>`:''}
+        <div style="display:flex;align-items:center;gap:6px">
+          <span style="font-weight:800;font-size:13px;color:var(--txt)">€ ${fmt(budgetTotal)}</span>
+          ${doMode==='intern'?`<button class="btn-icon" style="margin-left:0;padding:3px 5px" onclick="openDoBudgetModal()" title="Budget beheren"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M2 12h3M19 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12"/></svg></button>`:''}
+        </div>
       </div>
       <div class="do-budget-rate">€${DEV_RATE}/u DEV · €${PO_RATE}/u PO</div>
       <div class="do-bar-label">DEV UREN</div>
