@@ -335,6 +335,7 @@ tr.row-red{background:var(--red-row)}
       <div class="do-filters" id="doFilters"></div>
       <div class="do-toolbar">
         <button class="btn-icon" onclick="doExportCsv()" title="CSV Export"><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></button>
+        <button class="btn-icon" onclick="openTlImport()" title="Teamleader Excel Import"><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg></button>
         <button class="btn-p" onclick="openDoTicketModal()">+ Ticket</button>
       </div>
     </div>
@@ -343,8 +344,32 @@ tr.row-red{background:var(--red-row)}
   </div>
 </div>
 
-<!-- ===== MODALS ===== -->
-<!-- PO Add row -->
+<!-- DO Teamleader Import -->
+<div class="modal-overlay" id="tlImportModal">
+  <div class="modal">
+    <div class="modal-title">📥 Teamleader Import</div>
+    <p style="font-size:12px;color:var(--mut);margin-bottom:16px">Upload het Teamleader project Excel bestand. Tickets worden automatisch aangemaakt. Dev &lt;24u → GO, overige blijven open.</p>
+    <div class="modal-field">
+      <label class="modal-label">Project</label>
+      <select class="modal-select" id="tlProject"></select>
+    </div>
+    <div id="tlDropZone" style="border:2px dashed var(--bdr);border-radius:var(--r);padding:28px 20px;text-align:center;cursor:pointer;transition:border-color .15s" onclick="document.getElementById('tlFileInput').click()" ondragover="event.preventDefault();this.style.borderColor='var(--bleu-m)'" ondragleave="this.style.borderColor='var(--bdr)'" ondrop="handleTlDrop(event)">
+      <svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" style="color:var(--mut);margin-bottom:8px"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+      <div style="font-size:13px;font-weight:600;color:var(--mut)">Klik of sleep Excel bestand hier</div>
+      <div id="tlFileName" style="font-size:11px;color:var(--bleu-m);margin-top:6px;display:none"></div>
+    </div>
+    <input type="file" id="tlFileInput" accept=".xlsx,.xls" style="display:none" onchange="handleTlFile(this)">
+    <div id="tlImportStatus" style="font-size:12px;margin-top:12px;display:none"></div>
+    <div id="tlPreview" style="margin-top:12px;display:none">
+      <div style="font-size:10px;font-weight:700;color:var(--mut);text-transform:uppercase;letter-spacing:.4px;margin-bottom:8px">Preview tickets</div>
+      <div id="tlPreviewList" style="max-height:200px;overflow-y:auto;border:1px solid var(--bdr);border-radius:var(--r)"></div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-cancel" onclick="closeModal('tlImportModal')">Annuleren</button>
+      <button class="btn-p" id="tlImportBtn" onclick="doTlImport()" disabled style="opacity:.4">Importeren</button>
+    </div>
+  </div>
+</div>
 <div class="modal-overlay" id="addModal">
   <div class="modal">
     <div class="modal-title">Nieuwe regel toevoegen</div>
@@ -979,10 +1004,10 @@ function renderDoTickets(){
     hdr.innerHTML=`<div><span class="do-group-title">${proj.name}</span><span class="do-group-count">${tickets.length} ticket${tickets.length!==1?'s':''}</span></div><div class="do-group-go">Go: ${goDev}u DEV · ${goPo}u PO · € ${fmt(goTotal)}</div>`;
     group.appendChild(hdr);
     const isClient=doMode==='client';
-    const gridCols=isClient?'36px 110px 1fr 58px 58px 110px 48px 160px':'36px 110px 1fr 58px 58px 110px 48px 160px 32px 32px';
+    const gridCols=isClient?'36px 1fr 58px 58px 110px 48px 160px':'36px 1fr 58px 58px 110px 48px 160px 32px 32px';
     const scrollWrap=document.createElement('div');scrollWrap.className='do-table-scroll';
     const ch=document.createElement('div');ch.className='do-col-header';ch.style.gridTemplateColumns=gridCols;
-    ch.innerHTML=`<span>#</span><span>Boardnr</span><span>Omschrijving</span><span style="text-align:right">DEV</span><span style="text-align:right">PO</span><span style="text-align:right">Totaal (€)</span><span></span><span>Validatie</span>${isClient?'':`<span style="text-align:center;color:var(--grn)" title="Afgerond">✓</span><span></span>`}`;
+    ch.innerHTML=`<span>#</span><span>Omschrijving</span><span style="text-align:right">DEV</span><span style="text-align:right">PO</span><span style="text-align:right">Totaal (€)</span><span></span><span>Validatie</span>${isClient?'':`<span style="text-align:center;color:var(--grn)" title="Afgerond">✓</span><span></span>`}`;
     scrollWrap.appendChild(ch);
     // Rows
     let rowIdx=0;
@@ -1002,7 +1027,6 @@ function renderDoTickets(){
       const tot=t.dev*DEV_RATE+t.po*PO_RATE;
       row.innerHTML=`
         <div class="do-ticket-cell do-ticket-num">${String(rowIdx).padStart(2,'0')}</div>
-        <div class="do-ticket-cell"><span class="do-board" ${isClient?'':'contenteditable="true"'} onblur="${isClient?'':'saveDoField(\''+t.id+'\',\'board\',this)'}">${t.board}</span></div>
         <div class="do-ticket-cell"><span ${isClient?'':'contenteditable="true"'} onblur="${isClient?'':'saveDoField(\''+t.id+'\',\'inh\',this)'}">${t.inh}</span></div>
         <div class="do-ticket-cell">${isClient?`<span style="text-align:right;display:block;color:var(--txt)">${t.dev}</span>`:`<input class="do-num-input" type="number" min="0" step="0.5" value="${t.dev}" onfocus="if(this.value==='0')this.value=''" onblur="restoreZero(this);saveDoNum('${t.id}','dev',this)" onchange="calcDoTotal('${t.id}')">`}</div>
         <div class="do-ticket-cell">${isClient?`<span style="text-align:right;display:block;color:var(--txt)">${t.po}</span>`:`<input class="do-num-input" type="number" min="0" step="0.5" value="${t.po}" onfocus="if(this.value==='0')this.value=''" onblur="restoreZero(this);saveDoNum('${t.id}','po',this)" onchange="calcDoTotal('${t.id}')">`}</div>
@@ -1029,7 +1053,7 @@ function renderDoTickets(){
     const ftDev=tickets.reduce((s,t)=>s+t.dev,0);
     const ftPo=tickets.reduce((s,t)=>s+t.po,0);
     const ftTotal=ftDev*DEV_RATE+ftPo*PO_RATE;
-    ft.innerHTML=`<span></span><span></span><span style="color:rgba(255,255,255,.5);font-size:11px;text-transform:uppercase;letter-spacing:.4px">Subtotaal</span><span style="text-align:right;color:rgba(255,255,255,.6)">${ftDev}</span><span style="text-align:right;color:rgba(255,255,255,.6)">${ftPo}</span><span class="do-total-cell" style="text-align:right">€ ${fmt(ftTotal)}</span><span></span><span></span>${isClient?'':'<span></span><span></span>'}`;
+    ft.innerHTML=`<span></span><span style="color:rgba(255,255,255,.5);font-size:11px;text-transform:uppercase;letter-spacing:.4px">Subtotaal</span><span style="text-align:right;color:rgba(255,255,255,.6)">${ftDev}</span><span style="text-align:right;color:rgba(255,255,255,.6)">${ftPo}</span><span class="do-total-cell" style="text-align:right">€ ${fmt(ftTotal)}</span><span></span><span></span>${isClient?'':'<span></span><span></span>'}`;
     scrollWrap.appendChild(ft);
     group.appendChild(scrollWrap);
     container.appendChild(group);
@@ -1037,7 +1061,7 @@ function renderDoTickets(){
   // Grand total
   if(grandTotal>0||container.children.length>0){
     const gt=document.createElement('div');gt.className='do-grand-total';
-    gt.innerHTML=`<span></span><span></span><span style="color:rgba(255,255,255,.5);font-size:11px;text-transform:uppercase;letter-spacing:.4px">Totaal</span><span style="text-align:right;color:rgba(255,255,255,.6)">${grandDev}</span><span style="text-align:right;color:rgba(255,255,255,.6)">${grandPo}</span><span class="do-total-cell" style="text-align:right">€ ${fmt(grandTotal)}</span><span></span><span></span><span></span>`;
+    gt.innerHTML=`<span></span><span style="color:rgba(255,255,255,.5);font-size:11px;text-transform:uppercase;letter-spacing:.4px">Totaal</span><span style="text-align:right;color:rgba(255,255,255,.6)">${grandDev}</span><span style="text-align:right;color:rgba(255,255,255,.6)">${grandPo}</span><span class="do-total-cell" style="text-align:right">€ ${fmt(grandTotal)}</span><span></span><span></span><span></span>`;
     container.appendChild(gt);
   }
 }
@@ -1164,6 +1188,174 @@ async function saveDoEdit(){
   closeModal('doEditModal');
   renderDo();
   showToast('Ticket opgeslagen ✓');
+}
+// ===== TEAMLEADER IMPORT =====
+function openTlImport(){
+  const sel=document.getElementById('tlProject');sel.innerHTML='';
+  doProjects.forEach(p=>{const o=document.createElement('option');o.value=p.id;o.textContent=p.name;sel.appendChild(o);});
+  document.getElementById('tlFileName').style.display='none';
+  document.getElementById('tlImportStatus').style.display='none';
+  document.getElementById('tlPreview').style.display='none';
+  document.getElementById('tlFileInput').value='';
+  document.getElementById('tlImportBtn').disabled=true;
+  document.getElementById('tlImportBtn').style.opacity='.4';
+  window._tlParsed=null;
+  document.getElementById('tlImportModal').classList.add('open');
+}
+function handleTlDrop(e){
+  e.preventDefault();
+  document.getElementById('tlDropZone').style.borderColor='var(--bdr)';
+  const file=e.dataTransfer.files[0];
+  if(file)processTlFile(file);
+}
+function handleTlFile(input){
+  const file=input.files[0];
+  if(file)processTlFile(file);
+}
+function processTlFile(file){
+  if(!file.name.match(/\.xlsx?$/i)){showTlStatus('⚠ Alleen .xlsx bestanden.','var(--red)');return;}
+  document.getElementById('tlFileName').textContent=file.name;
+  document.getElementById('tlFileName').style.display='block';
+  // Load SheetJS if needed, then parse
+  function parse(){
+    const XLSX=window.XLSX;
+    const reader=new FileReader();
+    reader.onload=e=>{
+      try{
+        const wb=XLSX.read(e.target.result,{type:'array'});
+        const ws=wb.Sheets[wb.SheetNames[0]];
+        const raw=XLSX.utils.sheet_to_json(ws,{header:1,defval:null});
+        const{tickets,detectedProjectName}=parseTlExcel(raw);
+        // Auto-select project based on detected name
+        if(detectedProjectName){
+          const sel=document.getElementById('tlProject');
+          const match=doProjects.find(p=>detectedProjectName.toLowerCase().includes(p.name.toLowerCase())||p.name.toLowerCase().includes(detectedProjectName.toLowerCase().replace(' app','').replace(' apps','')));
+          if(match){
+            sel.value=match.id;
+            sel.style.borderColor='var(--grn)';
+          }
+        }
+        window._tlParsed=tickets;
+        showTlPreview(tickets);
+        document.getElementById('tlImportBtn').disabled=false;
+        document.getElementById('tlImportBtn').style.opacity='1';
+        const autoGo=tickets.filter(t=>t.status==='GO').length;
+        const open=tickets.filter(t=>t.status==='TE VALIDEREN').length;
+        showTlStatus(`✓ ${tickets.length} tickets gevonden — ${autoGo} auto GO, ${open} te valideren`,'var(--grn)');
+      }catch(err){showTlStatus('⚠ Bestand kon niet worden gelezen: '+err.message,'var(--red)');}
+    };
+    reader.readAsArrayBuffer(file);
+  }
+  if(window.XLSX){parse();}
+  else{
+    const sc=document.createElement('script');
+    sc.src='https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js';
+    sc.onload=parse;
+    sc.onerror=()=>showTlStatus('Kon SheetJS niet laden','var(--red)');
+    document.head.appendChild(sc);
+  }
+}
+function parseTlExcel(raw){
+  // Extract project name from top rows (row with label 'Naam')
+  let detectedProjectName='';
+  for(let i=0;i<12;i++){
+    if(raw[i]&&String(raw[i][0]||'').trim()==='Naam'){
+      detectedProjectName=String(raw[i][1]||'').trim();
+      break;
+    }
+  }
+  // Find header row
+  let headerRow=-1;
+  for(let i=0;i<raw.length;i++){
+    if(raw[i]&&raw[i].includes('Hoeveelheid')){headerRow=i;break;}
+  }
+  if(headerRow<0)throw new Error('Header rij niet gevonden');
+  const headers=raw[headerRow];
+  const iNaam=headers.indexOf('Naam');
+  const iHoev=headers.indexOf('Hoeveelheid');
+  const iTarief=headers.indexOf('Tariefnaam');
+  const tickets=[];
+  let currentSection='';
+  for(let i=headerRow+1;i<raw.length;i++){
+    const row=raw[i];
+    if(!row||!row[iNaam])continue;
+    const naam=String(row[iNaam]).trim();
+    const hoev=row[iHoev];
+    const tarief=row[iTarief]?String(row[iTarief]).trim():'';
+    // Section header = naam but no hoeveelheid
+    if(hoev===null||hoev===undefined||hoev===''){
+      currentSection=naam;
+      continue;
+    }
+    // Skip non-billable and support
+    if(tarief==='Niet-factureerbaar'||tarief==='Support')continue;
+    // Skip 0-hour rows
+    const uren=parseFloat(hoev)||0;
+    if(uren<=0)continue;
+    // Determine dev vs po
+    const isDev=tarief==='Development';
+    const isPo=tarief==='Product Owner';
+    if(!isDev&&!isPo)continue;
+    // Description: section > name
+    const desc=currentSection&&currentSection!==naam?`${currentSection} › ${naam}`:naam;
+    // Auto-GO: dev tickets < 24 hours
+    const autoGo=isDev&&uren<24;
+    tickets.push({
+      board:'TL-',
+      inh:desc,
+      dev:isDev?uren:0,
+      po:isPo?uren:0,
+      status:autoGo?'GO':'TE VALIDEREN',
+      comment:'',
+      done:false
+    });
+  }
+  return{tickets,detectedProjectName};
+}
+function showTlStatus(msg,color){
+  const el=document.getElementById('tlImportStatus');
+  el.textContent=msg;el.style.color=color;el.style.display='block';
+}
+function showTlPreview(tickets){
+  const list=document.getElementById('tlPreviewList');
+  list.innerHTML='';
+  tickets.forEach(t=>{
+    const row=document.createElement('div');
+    row.style.cssText='display:flex;align-items:center;justify-content:space-between;padding:7px 12px;border-bottom:1px solid var(--bdr);font-size:12px;gap:8px';
+    const hours=t.dev>0?`${t.dev}u DEV`:`${t.po}u PO`;
+    const badge=t.status==='GO'?'<span style="font-size:10px;font-weight:700;padding:2px 7px;border-radius:10px;background:#16A34A;color:#fff">GO</span>':'<span style="font-size:10px;font-weight:700;padding:2px 7px;border-radius:10px;background:var(--bdr);color:var(--mut)">Open</span>';
+    row.innerHTML=`<span style="flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--txt)">${t.inh}</span><span style="color:var(--mut);white-space:nowrap;margin-right:8px">${hours}</span>${badge}`;
+    list.appendChild(row);
+  });
+  document.getElementById('tlPreview').style.display='block';
+}
+async function doTlImport(){
+  const tickets=window._tlParsed;
+  if(!tickets||!tickets.length){showTlStatus('Geen tickets om te importeren','var(--red)');return;}
+  const pid=document.getElementById('tlProject').value;
+  showTlStatus('Bezig met importeren…','var(--mut)');
+  document.getElementById('tlImportBtn').disabled=true;
+  let imported=0;
+  for(const t of tickets){
+    const nt=await insertDoTicket({pid,board:t.board,inh:t.inh,dev:t.dev,po:t.po});
+    if(nt&&t.status==='GO'){
+      nt.status='GO';
+      await updateDoTicket(nt.id,{status:'GO'});
+    }
+    imported++;
+  }
+  // Update budget for project based on total hours
+  const proj=doProjects.find(p=>p.id===pid);
+  if(proj){
+    const totalDev=tickets.reduce((s,t)=>s+t.dev,0);
+    const totalPo=tickets.reduce((s,t)=>s+t.po,0);
+    proj.d_budget=Math.round(proj.d_budget+totalDev);
+    proj.p_budget=Math.round(proj.p_budget+totalPo);
+    await updateDoBudget(pid,proj.d_budget,proj.p_budget);
+  }
+  closeModal('tlImportModal');
+  renderDo();
+  showToast(`✓ ${imported} tickets geïmporteerd`);
 }
 function openDoBudgetModal(){
   const content=document.getElementById('doBudgetModalContent');content.innerHTML='';
